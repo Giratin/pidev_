@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Randonne</h1>
+
+    <table class="table">
+        <tbody>
+            <tr >
+                <th scope="col" >Idrando</th>
+                <td>{{ randonne.idrando }}</td>
+            </tr>
+            <tr>
+                <th scope="col">Capacite</th>
+                <td>{{ randonne.capacite }}</td>
+            </tr>
+            <tr>
+                <th scope="col">Nbreclient</th>
+                <td>{{ randonne.nbreclient }}</td>
+            </tr>
+            <tr>
+                <th scope="col">Daterando</th>
+                <td>{{ randonne.daterando }}</td>
+            </tr>
+            <tr>
+                <th scope="col">Destination</th>
+                <td>{{ randonne.destination }}</td>
+            </tr>
+            <tr>
+                <th scope="col">Nbrebus</th>
+                <td>{{ randonne.nbrebus }}</td>
+            </tr>
+            <tr>
+                <th scope="col">Prixpersonne</th>
+                <td>{{ randonne.prixpersonne }}</td>
+            </tr>
+            <tr>
+                <th scope="col">Programme</th>
+                <td>{{ randonne.programme }}</td>
+            </tr>
+            <tr>
+                <th scope="col">Googlemaps</th>
+                <td>{{ randonne.googlemaps }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('randonne_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('randonne_edit', { 'idrando': randonne.idrando }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

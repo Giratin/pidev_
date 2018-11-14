@@ -1,0 +1,82 @@
+<?php
+
+namespace ExcursionBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Randonne
+ *
+ * @ORM\Table(name="randonne", uniqueConstraints={@ORM\UniqueConstraint(name="idRandonne", columns={"idRando"})})
+ * @ORM\Entity
+ */
+class Randonne
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idRando", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idrando;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="capacite", type="integer", nullable=false)
+     */
+    private $capacite;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nbreClient", type="integer", nullable=true)
+     */
+    private $nbreclient;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dateRando", type="string", length=30, nullable=false)
+     */
+    private $daterando;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="destination", type="string", length=50, nullable=false)
+     */
+    private $destination;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nbreBus", type="integer", nullable=false)
+     */
+    private $nbrebus = '1';
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="prixPersonne", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $prixpersonne;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="programme", type="text", length=65535, nullable=false)
+     */
+    private $programme;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="googlemaps", type="text", length=65535, nullable=false)
+     */
+    private $googlemaps;
+
+
+}
+

@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Randonnes list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Idrando</th>
+                <th>Capacite</th>
+                <th>Nbreclient</th>
+                <th>Daterando</th>
+                <th>Destination</th>
+                <th>Nbrebus</th>
+                <th>Prixpersonne</th>
+                <th>Programme</th>
+                <th>Googlemaps</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for randonne in randonnes %}
+            <tr>
+                <td><a href="{{ path('randonne_show', { 'idrando': randonne.idrando }) }}">{{ randonne.idrando }}</a></td>
+                <td>{{ randonne.capacite }}</td>
+                <td>{{ randonne.nbreclient }}</td>
+                <td>{{ randonne.daterando }}</td>
+                <td>{{ randonne.destination }}</td>
+                <td>{{ randonne.nbrebus }}</td>
+                <td>{{ randonne.prixpersonne }}</td>
+                <td>{{ randonne.programme }}</td>
+                <td>{{ randonne.googlemaps }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('randonne_show', { 'idrando': randonne.idrando }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('randonne_edit', { 'idrando': randonne.idrando }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('randonne_new') }}">Create a new randonne</a>
+        </li>
+    </ul>
+{% endblock %}
