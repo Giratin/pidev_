@@ -1,53 +1,136 @@
 {% extends 'base.html.twig' %}
 
+
 {% block body %}
-    <h1>Randonnes list</h1>
+    {% block status %}
+        {% if(user != null)%}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path ('fos_user_profile_show') }}"><i class="fa fa-user"></i> Profile</a>
+            </li>
+            <li class="nav-item" style="margin-right: -60px; margin-top: 10px">
+                <a href="{{ path('fos_user_security_logout') }}" style="color: #fff;"><i class="fa fa-sign-out"></i> Logout</a>
+            </li>
+        {% else %}
+            <li class="nav-item" style="margin-right: -60px; margin-top: 10px">
+                <a href="{{ path('fos_user_security_login') }}" style="color: #fff;"><i class="fa fa-sign-out"></i>Login</a>
+            </li>
+        {% endif %}
+    {% endblock %}
 
-    <table>
-        <thead>
-            <tr>
-                <th>Idrando</th>
-                <th>Capacite</th>
-                <th>Nbreclient</th>
-                <th>Daterando</th>
-                <th>Destination</th>
-                <th>Nbrebus</th>
-                <th>Prixpersonne</th>
-                <th>Programme</th>
-                <th>Googlemaps</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for randonne in randonnes %}
-            <tr>
-                <td><a href="{{ path('randonne_show', { 'idrando': randonne.idrando }) }}">{{ randonne.idrando }}</a></td>
-                <td>{{ randonne.capacite }}</td>
-                <td>{{ randonne.nbreclient }}</td>
-                <td>{{ randonne.daterando }}</td>
-                <td>{{ randonne.destination }}</td>
-                <td>{{ randonne.nbrebus }}</td>
-                <td>{{ randonne.prixpersonne }}</td>
-                <td>{{ randonne.programme }}</td>
-                <td>{{ randonne.googlemaps }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('randonne_show', { 'idrando': randonne.idrando }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('randonne_edit', { 'idrando': randonne.idrando }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<div class="container">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Capacité</th>
+                    <th scope="col">Nombre de client</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Programme</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for m in randonnes %}
+                    <tr>
+                        <th scope="row">{{ m.capacite}}</th>
+                        <td>{{ m.nbreClient}}</td>
+                        <td>{{ m.prixPersonne}}</td>
+                        <td>{{ m.programme}}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('randonne_new') }}">Create a new randonne</a>
-        </li>
-    </ul>
+
+    <style>
+        .btn-product{
+            width: 100%;
+        }
+    </style>
+
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div style="border: 1px solid #ccc; border-radius: 5px;" class="col-md-3">
+                <div class="thumbnail" >
+                    <h4 class="text-center">
+                        <span class="label label-info">Destination</span>
+                    </h4>
+                    <img src="http://placehold.it/650x450&text=Galaxy S5" class="img-responsive">
+                    <div class="caption">
+                        <div class="row">
+                            <div class="col-md-6 col-xs-6 price">
+                                <h3>
+                                    <label>Price</label>
+                                </h3>
+                            </div>
+                        </div>
+                        <p>Program</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a class="btn btn-primary btn-product"><span class="glyphicon glyphicon-thumbs-up"></span> View</a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="#" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Enroll</a></div>
+                        </div>
+
+                        <p> </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div style="border: 1px solid #ccc; border-radius: 5px;" class="col-md-3">
+                <div class="thumbnail" >
+                    <h4 class="text-center"><span class="label label-info">Apple</span></h4>
+                    <img src="http://placehold.it/650x450&text=iPhone 6" class="img-responsive">
+                    <div class="caption">
+                        <div class="row">
+                            <div class="col-md-6 col-xs-6">
+                                <h3>iPhone 6</h3>
+                            </div>
+                            <div class="col-md-6 col-xs-6 price">
+                                <h3>
+                                    <label>$749.99</label></h3>
+                            </div>
+                        </div>
+                        <p>32GB, 64Bit, 1080HD, 4.7 inches, iOS 8</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a class="btn btn-primary btn-product"><span class="glyphicon glyphicon-thumbs-up"></span> Like</a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="#" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Buy</a></div>
+                        </div>
+
+                        <p> </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div style="border: 1px solid #ccc; border-radius: 5px;" class="col-md-3">
+                <div class="thumbnail" >
+                    <h4 class="text-center"><span class="label label-info">Nokia</span></h4>
+                    <img src="http://placehold.it/650x450&text=Lumia 1520" class="img-responsive">
+                    <div class="caption">
+                        <div class="row">
+                            <div class="col-md-6 col-xs-6">
+                                <h3>Lumia 1520</h3>
+                            </div>
+                            <div class="col-md-6 col-xs-6 price">
+                                <h3>
+                                    <label>$749.00</label></h3>
+                            </div>
+                        </div>
+                        <p>32GB, 4GB Ram, 1080HD, 6.3 inches, WP 8</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a class="btn btn-primary btn-product"><span class="glyphicon glyphicon-thumbs-up"></span> Like</a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="#" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Buy</a></div>
+                        </div>
+
+                        <p> </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

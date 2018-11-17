@@ -21,9 +21,10 @@ class RandonneController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $randonnes = $em->getRepository(Randonne::class)->findAll();
-
+        $u = $this->getUser();
         return $this->render('@Excursion/randonne/index.html.twig', array(
             'randonnes' => $randonnes,
+            'user' => $u,
         ));
     }
 
@@ -47,6 +48,7 @@ class RandonneController extends Controller
 
         return $this->render('@Excursion/randonne/new.html.twig', array(
             'randonne' => $randonne,
+
             'form' => $form->createView(),
         ));
     }
@@ -61,7 +63,7 @@ class RandonneController extends Controller
 
         return $this->render('@Excursion/randonne/show.html.twig', array(
             'randonne' => $randonne,
-            'delete_form' => $deleteForm->createView(),
+            'delete_form' => $deleteForm->createView()
         ));
     }
 
