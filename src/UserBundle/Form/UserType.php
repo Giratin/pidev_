@@ -17,11 +17,11 @@ class UserType extends AbstractType
             ->add('prenom')
             ->add('username')
             ->add('email')
-            ->add('password')
             ->add('mobile')
             ->add('addresse')
             ->add('codePostal')
-            ->add('pays');
+            ->add('pays')
+            ->add('password');
     }/**
      * {@inheritdoc}
      */

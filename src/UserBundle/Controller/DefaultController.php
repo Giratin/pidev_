@@ -37,7 +37,7 @@ class DefaultController extends Controller
     {
         $u = $this->getUser();
 
-        $this->render('@User/User/profile.html.twig', array(
+        return $this->render('@User/User/profile.html.twig', array(
             'user' => $u
         ));
     }

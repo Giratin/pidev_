@@ -1,24 +1,24 @@
 randonne_index:
     path:     /
-    defaults: { _controller: "ExcursionBundle:randonne:index" }
+    defaults: { _controller: "ExcursionBundle:Randonne:index" }
     methods:  GET
 
 randonne_show:
     path:     /show/{idrando}
-    defaults: { _controller: "ExcursionBundle:randonne:show" }
+    defaults: { _controller: "ExcursionBundle:Randonne:show" }
     methods:  GET
 
 randonne_new:
     path:     /new
-    defaults: { _controller: "ExcursionBundle:randonne:new" }
+    defaults: { _controller: "ExcursionBundle:Randonne:new" }
     methods:  [GET, POST]
 
 randonne_edit:
     path:     /edit/{idrando}
-    defaults: { _controller: "ExcursionBundle:randonne:edit" }
+    defaults: { _controller: "ExcursionBundle:Randonne:edit" }
     methods:  [GET, POST]
 
 randonne_delete:
     path:     /delete/{idrando}
-    defaults: { _controller: "ExcursionBundle:randonne:delete" }
+    defaults: { _controller: "ExcursionBundle:Randonne:delete" }
     methods:  DELETE
