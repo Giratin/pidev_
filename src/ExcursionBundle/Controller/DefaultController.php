@@ -8,6 +8,9 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('ExcursionBundle:Default:index.html.twig');
+
+        return $this->render('ExcursionBundle:Default:index.html.twig', array(
+        'user' => $u,
+    ));
     }
 }

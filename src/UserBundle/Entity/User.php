@@ -66,7 +66,6 @@ class User extends FosUser
     protected $pays;
 
 
-
     /**
      * Get id
      *
@@ -606,5 +605,6 @@ class User extends FosUser
     public function __construct()
     {
         parent::__construct();
+        $this->roles = array('ROLE_USER');
     }
 }
