@@ -2,6 +2,10 @@ user:
     resource: "@UserBundle/Resources/config/routing.yml"
     prefix:   /
 
+admin:
+    resource: "@AdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
 excursion:
     resource: "@ExcursionBundle/Resources/config/routing.yml"
     prefix:   /excursion
