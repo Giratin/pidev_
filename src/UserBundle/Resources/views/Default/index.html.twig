@@ -2,7 +2,7 @@
     {% block status %}
         {% if(user != null)%}
             <li class="nav-item">
-                <a class="nav-link" href="{{ path ('fos_user_profile_show') }}"><i class="fa fa-user"></i> Profile</a>
+                <a class="nav-link" href="{{ path ('user_profile') }}"><i class="fa fa-user"></i> Profile</a>
             </li>
             <li class="nav-item" style="margin-right: -60px; margin-top: 10px">
                 <a href="{{ path('fos_user_security_logout') }}" style="color: #fff;"><i class="fa fa-sign-out"></i> Logout</a>
@@ -13,4 +13,5 @@
             </li>
         {% endif %}
     {% endblock %}
+
 

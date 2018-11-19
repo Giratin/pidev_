@@ -1,0 +1,43 @@
+{% extends "profile.html.twig" %}
+{% block title %}HolidaysNow | Profile{% endblock %}
+{% block body %}
+
+    {% block status %}
+        {% if(user != null)%}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path ('fos_user_profile_show') }}"><i class="fa fa-user"></i> Profile</a>
+            </li>
+            <li class="nav-item" style="margin-right: -60px; margin-top: 10px">
+                <a href="{{ path('fos_user_security_logout') }}" style="color: #fff;"><i class="fa fa-sign-out"></i> Logout</a>
+            </li>
+        {% else %}
+            <li class="nav-item" style="margin-right: -60px; margin-top: 10px">
+                <a href="{{ path('fos_user_security_login') }}" style="color: #fff;"><i class="fa fa-sign-out"></i>Login</a>
+            </li>
+        {% endif %}
+    {% endblock %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-5" style="margin-bottom: 40px">
+            {{ form_start(edit) }}
+            {{ form_row(edit.nom) }}
+            {{ form_row(edit.prenom) }}
+            {{ form_row(edit.email) }}
+            {{ form_row(edit.username) }}
+            {{ form_row(edit.mobile) }}
+            {{ form_row(edit.addresse) }}
+            {{ form_row(edit.codePostal) }}
+            {{ form_row(edit.pays) }}
+            {{ form_row(edit.password) }}
+
+            {{ form_end(edit) }}
+            <input type="text" class="form-control" value="{{ user.nom }}">
+            <input type="submit" value="Update" style="margin-top: 30px; width: 120px;; display: block; margin: auto; margin-top: 30px" class="btn btn-success" >
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+
+</div>
+{% endblock %}

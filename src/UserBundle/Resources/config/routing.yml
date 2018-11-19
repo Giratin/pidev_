@@ -1,6 +1,10 @@
 user_homepage:
     path:     /
     defaults: { _controller: "UserBundle:Default:index" }
-user_update:
-    path:     /profile
-    defaults: { _controller: "UserBundle:Default:test" }
+user_profile:
+    path:     /profil
+    defaults: { _controller: "UserBundle:user:show" }
+
+user_edit:
+    path:     /profile/ed
+    defaults: { _controller: "UserBundle:user:edit" }

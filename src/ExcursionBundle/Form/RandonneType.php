@@ -13,7 +13,14 @@ class RandonneType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('capacite')->add('nbreclient')->add('daterando')->add('destination')->add('nbrebus')->add('prixpersonne')->add('programme')->add('googlemaps');
+        $builder->add('capacite')
+            ->add('nbreclient')
+            ->add('daterando')
+            ->add('destination')
+            ->add('nbrebus')
+            ->add('prixpersonne')
+            ->add('programme')
+            ->add('googlemaps');
     }/**
      * {@inheritdoc}
      */
