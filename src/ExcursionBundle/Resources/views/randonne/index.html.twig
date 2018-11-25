@@ -12,19 +12,22 @@
         <div class="col-lg-9"></div>
         <div class="col-lg-3">
             <input type="text" class="form-control" style="margin-bottom: 5px" placeholder="Type destination here ...">
-            <input type="submit" style="float: right; width: 120px" class="btn btn-warning" value="search">
         </div>
     </div>
     <div class="row">
+        {% for c in count %}
+        {{ c.nm }}
+        {% endfor %}
     {% for m in randonnes %}
             <div class="col-md-1" ></div>
             <div style="border: 1px solid #ccc; border-radius: 5px; margin-top: 30px; padding-bottom: 10px" class="col-md-3">
                 <div class="thumbnail" >
                     <h4 class="text-center">
                         <span class="label label-info" >Destination</span>
+                        {{ m.idrando}}
                         {{ m.destination}}
                     </h4>
-                    <img src="http://placehold.it/650x450&text=Galaxy S5" class="img-responsive">
+                    <img src="{{ m.imgurl1 }}" class="img-responsive">
                     <div class="caption">
                         <div class="row">
                             <div class="col-md-1"></div>
@@ -36,7 +39,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <a class="btn btn-primary btn-product"><span class="glyphicon glyphicon-thumbs-up"></span> View</a>
+                                <a class="btn btn-primary btn-product" href="{{ path('randonne_show',{'idrando':m.idrando}) }}"><span class="glyphicon glyphicon-thumbs-up"></span> View</a>
                             </div>
                             <div class="col-md-6">
                                 <a href="#" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Enroll</a></div>
@@ -47,7 +50,10 @@
     {% endfor %}
         </div>
 
-    <div style="margin-left: 40%; margin-top: 20px">{{ knp_pagination_render(randonnes) }}</div>
+    <div style="margin-left: 40%; margin-top: 20px">
+        {{ knp_pagination_render(randonnes) }}
+
+    </div>
     </div>
 
 {% endblock %}

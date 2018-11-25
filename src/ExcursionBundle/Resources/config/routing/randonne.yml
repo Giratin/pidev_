@@ -22,3 +22,8 @@ randonne_delete:
     path:     /delete/{idrando}
     defaults: { _controller: "ExcursionBundle:Randonne:delete" }
     methods:  DELETE
+
+randonne_old:
+    path:     /old
+    defaults: { _controller: "ExcursionBundle:Randonne:old" }
+    methods:  GET
