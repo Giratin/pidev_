@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Randonne
  *
  * @ORM\Table(name="randonne", uniqueConstraints={@ORM\UniqueConstraint(name="idRandonne", columns={"idRando"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ExcursionBundle\Repository\ExcursionRepository")
  */
 class Randonne
 {
@@ -33,7 +33,7 @@ class Randonne
      *
      * @ORM\Column(name="nbreClient", type="integer", nullable=true)
      */
-    private $nbreclient;
+    private $nbreclient = '0';
 
     /**
      * @var string
@@ -73,9 +73,30 @@ class Randonne
     /**
      * @var string
      *
-     * @ORM\Column(name="googlemaps", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="googlemaps", type="text", length=65535, nullable=true)
      */
     private $googlemaps;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="imgUrl1", type="string", length=255, nullable=false)
+     */
+    private $imgurl1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="imgUrl2", type="string", length=255, nullable=false)
+     */
+    private $imgurl2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="imgUrl3", type="string", length=255, nullable=false)
+     */
+    private $imgurl3;
 
 
 
@@ -279,5 +300,77 @@ class Randonne
     public function getGooglemaps()
     {
         return $this->googlemaps;
+    }
+
+    /**
+     * Set imgurl1
+     *
+     * @param string $imgurl1
+     *
+     * @return Randonne
+     */
+    public function setImgurl1($imgurl1)
+    {
+        $this->imgurl1 = $imgurl1;
+
+        return $this;
+    }
+
+    /**
+     * Get imgurl1
+     *
+     * @return string
+     */
+    public function getImgurl1()
+    {
+        return $this->imgurl1;
+    }
+
+    /**
+     * Set imgurl2
+     *
+     * @param string $imgurl2
+     *
+     * @return Randonne
+     */
+    public function setImgurl2($imgurl2)
+    {
+        $this->imgurl2 = $imgurl2;
+
+        return $this;
+    }
+
+    /**
+     * Get imgurl2
+     *
+     * @return string
+     */
+    public function getImgurl2()
+    {
+        return $this->imgurl2;
+    }
+
+    /**
+     * Set imgurl3
+     *
+     * @param string $imgurl3
+     *
+     * @return Randonne
+     */
+    public function setImgurl3($imgurl3)
+    {
+        $this->imgurl3 = $imgurl3;
+
+        return $this;
+    }
+
+    /**
+     * Get imgurl3
+     *
+     * @return string
+     */
+    public function getImgurl3()
+    {
+        return $this->imgurl3;
     }
 }

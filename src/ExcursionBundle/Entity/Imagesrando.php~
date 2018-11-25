@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Imagesrando
  *
  * @ORM\Table(name="imagesrando")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ExcursionBundle\Repository\ImagesrandoRepository")
  */
 class Imagesrando
 {
@@ -30,7 +30,7 @@ class Imagesrando
 
     /**
      * @ORM\ManyToOne(targetEntity="Randonne")
-     * @ORM\JoinColumn(name="idRando", referencedColumnName="id")
+     * @ORM\JoinColumn(name="idRando", referencedColumnName="idRando")
      */
     private $randonne;
 

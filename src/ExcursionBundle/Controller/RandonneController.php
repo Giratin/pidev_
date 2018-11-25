@@ -2,6 +2,7 @@
 
 namespace ExcursionBundle\Controller;
 
+use ExcursionBundle\Entity\Imagesrando;
 use ExcursionBundle\Entity\Randonne;
 use ExcursionBundle\Form\RandonneType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -15,20 +16,19 @@ class RandonneController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        /*$randonnes = $em->getRepository(Randonne::class)->findAll();
-        $u = $this->getUser();
-        return $this->render('@Excursion/randonne/index.html.twig', array(
-            'randonnes' => $randonnes,
-            'user' => $u,
-        ));*/
-
         $listRando = $this->getDoctrine()->getRepository(Randonne::class)->myFindByNewDate();
+        $count = $this->getDoctrine()->getRepository(Randonne::class)->countNewExcursion();
+
+        //$listRando = $this->getDoctrine()->getRepository(Randonne::class)->findAll();
+
+
         $randonne = $this->get('knp_paginator')->paginate(
             $listRando,
             $request->query->get('page',1),6
         );
         return $this->render('@Excursion/randonne/index.html.twig', array(
             'randonnes' => $randonne,
+            'count' => $count,
         ));
 
     }
@@ -113,5 +113,25 @@ class RandonneController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+
+
+    public function oldAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+
+        $listRando = $this->getDoctrine()->getRepository(Randonne::class)->myfindByOldDate();
+        $count = $this->getDoctrine()->getRepository(Randonne::class)->countOldExcursion();
+        $randonne = $this->get('knp_paginator')->paginate(
+            $listRando,
+            $request->query->get('page',1),6
+        );
+        return $this->render('@Excursion/randonne/old.html.twig', array(
+            'randonnes' => $randonne,
+            'num' => $count,
+        ));
+
     }
 }
