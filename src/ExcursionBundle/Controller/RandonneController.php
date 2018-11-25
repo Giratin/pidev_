@@ -11,22 +11,32 @@ use Symfony\Component\HttpFoundation\Request;
 class RandonneController extends Controller
 {
 
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $randonnes = $em->getRepository(Randonne::class)->findAll();
+        /*$randonnes = $em->getRepository(Randonne::class)->findAll();
         $u = $this->getUser();
         return $this->render('@Excursion/randonne/index.html.twig', array(
             'randonnes' => $randonnes,
             'user' => $u,
+        ));*/
+
+        $listRando = $this->getDoctrine()->getRepository(Randonne::class)->myFindByNewDate();
+        $randonne = $this->get('knp_paginator')->paginate(
+            $listRando,
+            $request->query->get('page',1),6
+        );
+        return $this->render('@Excursion/randonne/index.html.twig', array(
+            'randonnes' => $randonne,
         ));
+
     }
 
 
     public function newAction(Request $request)
     {
-        $randonne = new Randonne();
+       $randonne = new Randonne();
         $form = $this->createForm(RandonneType::class, $randonne);
         $form->handleRequest($request);
 
@@ -35,14 +45,16 @@ class RandonneController extends Controller
             $em->persist($randonne);
             $em->flush();
 
+
             return $this->redirectToRoute('randonne_show', array('idrando' => $randonne->getIdrando()));
         }
 
         return $this->render('@Excursion/randonne/new.html.twig', array(
             'randonne' => $randonne,
-
             'form' => $form->createView(),
         ));
+
+
     }
 
     public function showAction(Randonne $randonne)
