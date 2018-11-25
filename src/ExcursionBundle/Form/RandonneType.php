@@ -3,7 +3,12 @@
 namespace ExcursionBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Tests\Extension\Core\Type\NumberTypeTest;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RandonneType extends AbstractType
@@ -14,13 +19,14 @@ class RandonneType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('capacite')
-            ->add('nbreclient')
             ->add('daterando')
-            ->add('destination')
-            ->add('nbrebus')
+            ->add('destination', TextType::class, array('attr' =>array(
+                'class' => 'form-control',
+                'autofocus' => true,
+                'placeholder' => 'Destination'
+            )))
             ->add('prixpersonne')
-            ->add('programme')
-            ->add('googlemaps');
+            ->add('programme');
     }/**
      * {@inheritdoc}
      */

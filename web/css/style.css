@@ -194,8 +194,23 @@ ul.dropdown-menu li a:hover {
 	background: rgba(255, 255, 255, 0.2);
 	display: inline-block;
 }
+.W3l_fir {
+	float: left;
+	width: 40%;
+	margin: 10px 0px;
+	margin-right: 35px;
+}
 .banner-info_agile_w3ls a:hover{
 	color:#000;
+}
+
+.w3l_full {
+	padding: 45px;
+	background-color: rgba(0, 0, 0, 0.82);
+	clear: left;
+	width: 36%;
+	margin: 0 auto;
+	min-height: 532px;
 }
 .banner-info_agile_w3ls h3,.banner-info_agile_w3ls h2 {
 	font-size: 3em;

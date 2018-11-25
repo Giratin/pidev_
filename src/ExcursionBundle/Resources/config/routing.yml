@@ -2,3 +2,7 @@ excursion_randonne:
     resource: "@ExcursionBundle/Resources/config/routing/randonne.yml"
     prefix:   /
 
+homepage:
+    path: /home
+    defaults: { _controller: ExcursionBundle:Default:index}
+
