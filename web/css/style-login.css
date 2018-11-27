@@ -1000,7 +1000,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 
     height: 30px;
 
-    background: white url('../img/icons/search-line-icon.png') no-repeat 3px;
+    background: white url('../uploads/icons/search-line-icon.png') no-repeat 3px;
 
     padding-left: 24px;
 
@@ -1488,7 +1488,7 @@ div[data-role="editor-toolbar"] {
 
 .log-arrow-up {
 
-    background: url("../img/arrow-up.png") no-repeat;
+    background: url("../uploads/arrow-up.png") no-repeat;
 
     width: 20px;
 
@@ -3298,7 +3298,7 @@ div[data-role="editor-toolbar"] {
 
     box-shadow: none;
 
-    background: url("../img/search-icon.jpg") no-repeat 10px 8px;
+    background: url("../uploads/search-icon.jpg") no-repeat 10px 8px;
 
     padding:0 5px 0 35px;
 
@@ -3520,7 +3520,7 @@ div[data-role="editor-toolbar"] {
 
 .panel-body.chart-texture {
 
-    background: url("../img/chart-texture.jpg");
+    background: url("../uploads/chart-texture.jpg");
 
     -webkit-border-radius: 4px 4px 0px 0px;
 
@@ -4202,7 +4202,7 @@ ul.ft-link li a i {
 
     text-indent: -9999px;
 
-    background: url("../img/left-arrow.png") no-repeat;
+    background: url("../uploads/left-arrow.png") no-repeat;
 
     width: 6px;
 
@@ -4218,7 +4218,7 @@ ul.ft-link li a i {
 
     text-indent: -9999px;
 
-    background: url("../img/right-arrow.png") no-repeat;
+    background: url("../uploads/right-arrow.png") no-repeat;
 
     width: 6px;
 
@@ -4632,7 +4632,7 @@ ul.ft-link li a i {
 
 .profile-widget-img{
 
-    background: url('../img/backgrounds/bg-11-small.jpg') no-repeat !important;
+    background: url('../uploads/backgrounds/bg-11-small.jpg') no-repeat !important;
 
 }
 
@@ -5306,7 +5306,7 @@ ul.ft-link li a i {
 
 .weather-bg-img {
 
-    background: url(../img/backgrounds/bg-14-small.jpg) no-repeat center center;
+    background: url(../uploads/backgrounds/bg-14-small.jpg) no-repeat center center;
 
     color: #fff;
 
@@ -8082,9 +8082,9 @@ table.sliders tr td {
 
     width: 80px;
 
-    -webkit-mask: url('../img/mask.png') 0 0 no-repeat;
+    -webkit-mask: url('../uploads/mask.png') 0 0 no-repeat;
 
-    mask: url('../img/mask.png') 0 0 no-repeat;
+    mask: url('../uploads/mask.png') 0 0 no-repeat;
 
     -webkit-user-select: none;
 
@@ -8296,9 +8296,9 @@ table.sliders tr td {
 
     -webkit-border-radius: 6px;
 
-    -webkit-mask: url('../img/mask.png') 0 0 no-repeat;
+    -webkit-mask: url('../uploads/mask.png') 0 0 no-repeat;
 
-    mask: url('../img/mask.png') 0 0 no-repeat;
+    mask: url('../uploads/mask.png') 0 0 no-repeat;
 
 }
 
@@ -8622,7 +8622,7 @@ table.sliders tr td {
 
 .has-js .label_radio {
 
-    background: url(../img/checkbox/radio-off.png) no-repeat;
+    background: url(../uploads/checkbox/radio-off.png) no-repeat;
 
 }
 
@@ -8630,7 +8630,7 @@ table.sliders tr td {
 
 .has-js .label_check {
 
-    background: url(../img/checkbox/check-off.png) no-repeat;
+    background: url(../uploads/checkbox/check-off.png) no-repeat;
 
 }
 
@@ -8638,7 +8638,7 @@ table.sliders tr td {
 
 .has-js label.c_on {
 
-    background: url(../img/checkbox/check-on.png) no-repeat;
+    background: url(../uploads/checkbox/check-on.png) no-repeat;
 
 }
 
@@ -8646,7 +8646,7 @@ table.sliders tr td {
 
 .has-js label.r_on {
 
-    background: url(../img/checkbox/radio-on.png) no-repeat;
+    background: url(../uploads/checkbox/radio-on.png) no-repeat;
 
 }
 
@@ -9636,7 +9636,7 @@ span.customSelect.changed {
 
 .customSelectInner {
 
-    background:url(../img/customSelect-arrow.gif) no-repeat center right;
+    background:url(../uploads/customSelect-arrow.gif) no-repeat center right;
 
 }
 
