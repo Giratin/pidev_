@@ -10,6 +10,7 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    image_directory: '%kernel.project_dir%/web/uploads/'
 
 framework:
     #esi: ~
@@ -97,8 +98,3 @@ knp_paginator:
 
 vich_uploader:
     db_driver: orm
-    mappings:
-        devis:
-            uri_prefix: /img/
-            upload_destination: '%kernel.root_dir%/../web/img/'
-            namer: vich_uploader.namer_uniqid
