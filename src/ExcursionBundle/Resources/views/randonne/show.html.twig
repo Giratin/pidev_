@@ -35,24 +35,59 @@
             <div class="col-md-6">
 
                 <h1 style="text-align: center; margin-top: 60px; margin-bottom: 40px">{{ randonne.destination }}</h1>
-
-
+                <style>
+                    .blink_me {
+                        color: white;
+                        animation: blinker 2s cubic-bezier(0.6, -0.28, 0.74, 0.05) infinite;
+                    }
+                    .jet{
+                        background: red;
+                        border-radius: 3px;
+                        border-top-left-radius: 5px;
+                        color: #222;
+                        font-size: 14px;
+                        font-weight: 500;
+                        height: auto;
+                        line-height: normal;
+                        padding: 4px 6px;
+                        position: absolute;
+                        width: auto;
+                        z-index: 4;
+                    }
+                </style>
                 <table class="table">
                     <tbody>
                         <tr>
-                            <th scope="col">Place available</th>
-                            <td>{{ randonne.nbreclient }}</td>
+                            <th scope="col"> <i class=""></i> Available places</th>
+                            {%  if ((randonne.capacite - randonne.nbreclient) > 10)  %}
+                            <td>{{ randonne.capacite - randonne.nbreclient }}</td>
+                            {% elseif ((randonne.capacite - randonne.nbreclient) == 0 )%}
+                                <td>{{ randonne.capacite - randonne.nbreclient }}</td>
+                                <span class="jet" style="position: absolute; top: 367px; right: 140px;">
+
+                                    <p style="color: white">Expired <i class="fa fa-exclamation"></i> </p>
+                                    </span>
+                            {%  elseif (((randonne.capacite - randonne.nbreclient) < 10) ~ ((randonne.capacite - randonne.nbreclient) >= 1))  %}
+                                <td>
+                                    {{ randonne.capacite - randonne.nbreclient }}
+                                    &emsp;<span class="jet">
+                                        <p class="blink_me">Will expire soon</p>
+                                    </span>
+                                </td>
+
+
+                            {% endif %}
                         </tr>
                         <tr>
-                            <th scope="col">Date </th>
-                            <td>{{ randonne.daterando }}</td>
+                            <th scope="col"><i class="fa fa-calendar"></i> Date </th>
+                            <td> {{ randonne.daterando }}</td>
                         </tr>
                         <tr>
-                            <th scope="col">Price</th>
-                            <td>{{ randonne.prixpersonne }} TND</td>
+                            <th scope="col"><i class="fa fa-dollar"></i> Price</th>
+                            <td> {{ randonne.prixpersonne }} TND</td>
                         </tr>
                         <tr>
-                            <th scope="col">Programme</th>
+                            <th scope="col"><i class="fa fa-info-circle"></i> Program</th>
                             <td>{{ randonne.programme }}</td>
                         </tr>
                     </tbody>
@@ -69,10 +104,14 @@
                                 <a  id="btn" class="btn" style="background-color: #f2994a; color: #fff; font-weight: 600; margin-left: 250px" href="{{ path('randonne_reserve',{'idrando':randonne.idrando}) }}" >
                                     <span class="glyphicon glyphicon-shopping-cart"></span> Enroll
                                 </a>
-                                {% else %}
+                            {% elseif error == '1' %}
                                     <a  id="btn_e" class="btn" style="background-color: #f2994a; color: #fff; font-weight: 600; margin-left: 250px" href="{{ path('randonne_reserve',{'idrando':randonne.idrando}) }}" >
                                         <span class="glyphicon glyphicon-shopping-cart"></span> Enroll
                                     </a>
+                            {% elseif error == '2' %}
+                                        <a  id="btn_complet" class="btn" style="background-color: #f2994a; color: #fff; font-weight: 600; margin-left: 250px" href="" >
+                                            <span class="glyphicon glyphicon-shopping-cart"></span> Enroll
+                                        </a>
                             {% endif %}
                         {% endif %}
 
@@ -94,6 +133,17 @@
                         swal({
                             title: "Error!",
                             text: "You are already enrolled to this excursion",
+                            icon: "error",
+                            button: "Ok",
+                        });
+
+                    });
+
+                    $('#btn_complet').click(function (e) {
+                        e.preventDefault();
+                        swal({
+                            title: "Error!",
+                            text: "Available places in excursion has expired",
                             icon: "error",
                             button: "Ok",
                         });

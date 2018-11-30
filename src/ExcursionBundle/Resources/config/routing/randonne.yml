@@ -36,3 +36,7 @@ randonne_active_admin:
 randonne_reserve:
     path:     /reserve/{idrando}
     defaults: { _controller: "ExcursionBundle:Randonne:reserve" }
+user_randonne:
+    path:   /myexcursion
+    defaults: { _controller: "ExcursionBundle:Randonne:myexcursion" }
+

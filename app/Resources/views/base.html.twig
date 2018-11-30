@@ -52,7 +52,7 @@
 
                     <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item {% block active %}active{% endblock %}">
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ path('homepage') }}">Home <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
@@ -79,7 +79,8 @@
                                     <li>
                                         <p><i class="fa fa-hiking"></i>Excursions</p>
                                         &emsp;<a href="{{ path('randonne_index') }}">View Available</a>
-                                        &emsp;<a href="{{ path('randonne_old') }}">Archieve</a>
+                                        &emsp;<a href="{{ path('randonne_old') }}">Archieve</a> <br>
+                                        &emsp;<a href="{{ path('user_randonne') }}">My excursions</a>
                                     </li>
                                     <li>
                                         <p>Activity</p>

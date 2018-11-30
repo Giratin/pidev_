@@ -1,0 +1,24 @@
+voyage_homepage:
+    path:     /
+    defaults: { _controller: VoyageBundle:Default:index }
+voyage_read:
+    path:     /readVoyage
+    defaults: { _controller: VoyageBundle:Voyage:readVoyage }
+voyage_create:
+    path:     /createVoyage
+    defaults: { _controller: VoyageBundle:Voyage:createVoyage }
+voyage_delete:
+    path:     /deleteVoyage/{id}
+    defaults: { _controller: VoyageBundle:Voyage:deleteVoyage }
+voyage_update:
+    path:     /updateVoyage/{id}
+    defaults: { _controller: VoyageBundle:Voyage:updateVoyage }
+voyage_search:
+  path:     /searchVoyage
+  defaults: { _controller: VoyageBundle:Voyage:searchVoyage }
+voyage_search_ajax:
+  path:     /searchVoyageajax
+  defaults: { _controller: VoyageBundle:Voyage:searchAjax }
+voyage_Reserver:
+  path:     /reserver
+  defaults: { _controller: VoyageBundle:Reservationvoyage:ReserverVoyage }

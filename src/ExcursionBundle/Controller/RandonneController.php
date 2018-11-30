@@ -9,6 +9,7 @@ use ExcursionBundle\Form\RandonneType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 
 class RandonneController extends Controller
@@ -306,7 +307,28 @@ class RandonneController extends Controller
                     $reservation->setIdClient($idUser);
                     $reservation->setIdRandonne($idRando);
                     //die($idUser. ' ra: ' . $idRando);
+
                     $em = $this->getDoctrine()->getManager();
+                    //updating place available in randonne table
+                    $nbrClient = $em->getRepository(Randonne::class)->getAllAboutExcursion($idRando);
+
+
+                    //verification of number of inscriptions vs capacity
+                    if((int)$nbrClient[0]->getCapacite() > (int)$nbrClient[0]->getNbreclient() )
+                    {
+                        $new = (int)$nbrClient[0]->getNbreclient()+1;
+                       //
+
+                        $randonne->setNbreclient($new);
+                        //die('nbre actuel: '.$nbrClient[0]->getNbreclient().' new one: '.$new );
+                        //die('success');
+                    }
+                    else
+                    {
+                        $error = 2;
+                    }
+                    //Saving in new data DB
+
                     $em->persist($reservation);
                     $em->flush();
                     return $this->redirectToRoute('randonne_index');
@@ -322,5 +344,60 @@ class RandonneController extends Controller
             }
         }
 
+    }
+
+    public function myexcursionAction()
+    {
+        //$em = $this->getDoctrine()->
+
+        $user = $this->getUser();
+        if($user->getRoles()[0] == 'ROLE_USER')
+        {
+            $my = $this->getDoctrine()
+                ->getRepository(Randonne::class)
+                ->getAllMyExcursions($user->getId());
+
+            $excursion = $this->getDoctrine()
+                ->getRepository(Randonne::class)
+                //->findBy($my);
+                ->myFindExcursion($my);
+
+            $old = array();
+            $new = array();
+            foreach($excursion as $n)
+            {
+                //if($n->getDaterando())
+                //print_r($n->getDaterando());
+                $date = $n->getDaterando();
+
+                $Date = \DateTime::createFromFormat('Y-m-d', $date)->format('Y-m-d');
+                $today = date("Y-m-d");
+
+
+
+                if($Date > $today)
+                {
+                    $new[] = $n;
+                    //print("mazelt");
+                }
+                else{
+                    $old[] = $n;
+                    //print ("sayé");
+                }
+            }
+            //die(sizeof($my).' m');
+            return $this->render('@Excursion/randonne/excursion.html.twig', array(
+                'my' => $new,
+                'old' => $old,
+            ));
+        }
+        else if($user->getRoles()[0] == 'ROLE_ADMIN')
+        {
+
+        }
+        else
+        {
+            return $this->redirectToRoute('fos_user_security_login');
+        }
     }
 }
