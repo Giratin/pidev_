@@ -27,3 +27,12 @@ randonne_old:
     path:     /old
     defaults: { _controller: "ExcursionBundle:Randonne:old" }
     methods:  GET
+
+randonne_active_admin:
+    path:     /active
+    defaults: { _controller: "ExcursionBundle:Randonne:newadmin" }
+    methods:  GET
+
+randonne_reserve:
+    path:     /reserve/{idrando}
+    defaults: { _controller: "ExcursionBundle:Randonne:reserve" }

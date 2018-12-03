@@ -1,0 +1,40 @@
+<?php
+
+namespace ExcursionBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Reservationrandonne
+ *
+ * @ORM\Table(name="reservationrandonne")
+ * @ORM\Entity
+ */
+class Reservationrandonne
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_randonne", type="bigint", nullable=false)
+     */
+    private $idRandonne;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_client", type="integer", nullable=false)
+     */
+    private $idClient;
+
+
+}
+

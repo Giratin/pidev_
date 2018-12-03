@@ -43,11 +43,11 @@ class ExcursionRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter("today", new \DateTime());
         return $query->getResult();
     }
-/*
+
     public function countAllExcursion()
     {
-        $query  = $this->getEntityManager()->createQuery("SELECT count(*) FROM randonne");
+        $query  = $this->getEntityManager()->createQuery("SELECT count(R.idrando) as nm FROM ExcursionBundle:Randonne R");
         return $query->getResult();
     }
-    */
+
 }

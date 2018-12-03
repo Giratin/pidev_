@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4" style="margin-top: 50px">
+            <h1>Create new room</h1>
+            {{ form_start(f) }}
+<h4> Hotel's name:</h4>
+            {{ form_widget(f.hotel  ,{'type' : 'text','attr' : {'class' : 'form-control'}}) }}
+            <h4> Room's type:</h4>
+
+            {{ form_widget(f.typechambre  ,{'type' : 'text','attr' : {'class' : 'form-control', 'placeholder' : 'Single/Double'}}) }}
+ <h4> Number's room:</h4>
+            {{ form_widget(f.numchambre  ,{'type' : 'number','attr' : {'class' : 'form-control'}}) }}
+
+            <span id="numm_error" style="display: none; color: red; position: absolute; margin-left: 470px; margin-top: -30px"><i class="fa fa-exclamation-triangle"></i></span>
+            <span id="numm_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 470px; margin-top: -30px"><i class="fa fa-check-circle"></i></span>
+
+            <br>
+
+            <input id="btn_add" class="btn btn-primary" style="display: block; margin: auto; width: 150px;" type="submit" value="Ajouter">
+            {{ form_end(f) }}
+
+
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"> </script>
+    <script type="text/javascript" >
+
+        $("#hotelbundle_chambre_numchambre").keyup(function (){
+            var etoile=$("#hotelbundle_chambre_numchambre").val();
+            if((etoile<=0) ||( etoile>100)){
+                $("#numm_error").css("display","block");
+                $('#numm_succ').css("display","none");
+                $('#p1').show();
+            }
+            else{
+                $("#numm_error").css("display","none");
+                $('#numm_succ').css("display","block");
+                $('#p1').hide();
+            }
+        });
+
+        $("#btn_add").click(function (e) {
+            if($("#numm_error").css("display") == "block")
+            {
+                swal({
+                    title: "Wrong!",
+                    text: "Please verify entries",
+                    icon: "error",
+                    button: "Ok",
+                });
+                e.preventDefault();
+            }
+            else{
+                swal({
+                    title: "Success!",
+                    text: "PYou've successfully added rooms",
+                    icon: "success",
+                    button: "Ok",
+                });
+            }
+        });
+</script>
+{% endblock %}

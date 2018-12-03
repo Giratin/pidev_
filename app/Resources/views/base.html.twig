@@ -65,7 +65,7 @@
                                 <ul class="dropdown-menu agile_short_dropdown" style="background-color: #ccc;">
                                     <li>
                                         <p><i class="fa fa-hotel"></i> Hotels</p>
-                                        &emsp; <a href="">Pricing Plans</a>
+                                        &emsp; <a href="{{ path('hotel_read') }}">Pricing Plans</a>
                                     </li>
                                     <li>
                                         <p><i class="fa fa-plane"></i> Flights</p>
@@ -416,10 +416,10 @@
         </section>
 
         <script type="text/javascript" href="{{ asset('') }}"></script>
-        {% block javascripts %}{% endblock %}
+
         <script type="text/javascript" src="{{ asset('js/jquery-2.2.3.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script> <!-- Necessary-JavaScript-File-For-Bootstrap -->
-
+        {% block javascripts %}{% endblock %}
         <script src="{{ asset('js/jquery.desoslide.js') }}"></script>
         <script>
             $('#demo1_thumbs').desoSlide({

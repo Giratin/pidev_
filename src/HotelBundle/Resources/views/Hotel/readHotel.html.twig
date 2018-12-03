@@ -1,0 +1,242 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+
+
+
+<style>
+    .bg-orange {background:#d8622b;color:#fff!important;}
+    body{background:#f4f4f4;}
+    img{width:100%;max-height:560px;}
+    a {color:#696969;}
+</style>
+
+<!--main content section-->
+<section class="mb-5" style="margin-top: 30px">
+    <div class="container" style="">
+        <div class="row" style="margin-bottom: 20px">
+            <div class="col-md-4">
+                <a class="btn btn-success" href="{{ path('hotel_create') }}"><i class="fa fa-plus-square"></i> Create New Hotel</a>
+            </div>
+            <div class="col-md-4">
+                <h1 style="text-align: center; vert-align: top"><a class="navbar-brand" style=" font-size: 30px;font-family: Courgette" href="{{ path('homepage') }}">Hotels</a></h1>
+            </div>
+            <div class="col-md-1" ></div>
+            <div class="col-md-3">
+                <input type="text" style="border-radius: 5px" class="form-control" placeholder="Search here ..." id="stat">
+            </div>
+
+        </div>
+        <form id="f">
+        <div class="row" style="background-color:#ccc;  padding: 40px 15px;">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="row mb-3">
+                    {% for h in listHotel %}
+                    <div class="col-md-12" style="margin-bottom: 10px">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row" id="a">
+                                    <div class="col-md-3">
+                                        <img  src="{{ asset('uploads/'~ h.imgHotel) }}" >
+                                    </div>
+
+                                    <div class="col-md-5">
+                                        <h4>{{ h.nameHotel }}</h4>
+                                        <br>
+                                        <h5><i class="fa fa-map-marker"></i> {{ h.adresseHotel }}</h5>
+                                        <a target="_blank" href="https://maps.google.com/?q={{ h.adresseHotel }}"><span style="font-size: 18px"><i class="fa fa-map-marker"></i> View On Google Maps</span></a>
+                                        <br>
+
+
+                                        {% if(h.typeHotel == 1) %}
+                                            <i style="color: #FFD700;" class="fa fa-star"></i>
+                                        {% elseif(h.typeHotel == 2) %}
+                                            <i  style="color: #FFD700;" class="fa fa-star"></i>
+                                            <i  style="color: #FFD700;" class="fa fa-star"></i>
+                                        {% elseif(h.typeHotel == 3) %}
+                                            <i  style="color: #FFD700;" class="fa fa-star"></i>
+                                            <i  style="color: #FFD700;" class="fa fa-star"></i>
+                                            <i  style="color: #FFD700;" class="fa fa-star"></i>
+                                        {% elseif(h.typeHotel == 4) %}
+                                            <i  style="color: #FFD700;" class="fa fa-star"></i>
+                                            <i  style="color: #FFD700;" class="fa fa-star"></i>
+                                            <i  style="color: #FFD700;" class="fa fa-star"></i>
+                                            <i  style="color: #FFD700;" class="fa fa-star"></i>
+                                        {% elseif(h.typeHotel == 5) %}
+                                            <i  style="color: #FFD700;" class="fa fa-star"></i>
+                                            <i  style="color: #FFD700;" class="fa fa-star"></i>
+                                            <i  style="color: #FFD700;" class="fa fa-star"></i>
+                                            <i  style="color: #FFD700;" class="fa fa-star"></i>
+                                            <i  style="color: #FFD700;" class="fa fa-star"></i>
+                                        {% else %}
+                                            <i  style="color: #FFD700;" class="fa fa-star"></i>
+                                            <i  style="color: #FFD700;" class="fa fa-star"></i>
+                                            <i  style="color: #FFD700;" class="fa fa-star"></i>
+                                            <i  style="color: #FFD700;" class="fa fa-star"></i>
+                                            <i  style="color: #FFD700;" class="fa fa-star"></i>
+                                        {% endif %}
+
+                                    </div>
+                                    <div class="col-md-4">
+
+                                        <br>
+
+                                        <h6><i class="fa fa-bed"></i> Single room Price: {{ h.prixIndiv }}<i class="fa fa-dollar"></i></h6>
+                                        <h6><i class="fa fa-users"></i> Double room Price: {{ h.prixDouble }}<i class="fa fa-dollar"></i></h6>
+                                        <small>Available Rooms: {{ h.nbreDeChambreDespo }}</small><br>
+                                        <h7>Capacity: {{ h.nbreChambre }}</h7><br>
+
+                                        {% if(user == "admin") %}
+                                            <td><a class="btn btn-danger" href="{{ path('hotel_delete',{'id':h.idHotel}) }}">Delete</a> </td>
+                                            <td><a class="btn btn-success" href="{{ path('hotel_update',{'id':h.idHotel}) }}">Update</a> </td>
+                                            <td><a class="btn btn-success" href="{{ path('chambre_create',{'id':h.idHotel}) }}">Add Rooms</a> </td>
+
+                                        {% elseif(user == "user") %}
+                                            <a href="" id="book" style="display: block; margin: auto;" data-toggle="modal" data-target="#myModal{{ h.idHotel }}" class="btn btn-outline bg-orange">Book</a>
+                                        {% else %}
+                                            <a href="{{ path('fos_user_security_login') }}" style="display: block; margin: auto;"  class="btn btn-outline bg-orange" >Book</a>
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+    {% for h in listHotel %}
+    <div id="myModal{{ h.idHotel }}" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <form method="get" action="">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Header</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>{{ h.nameHotel }}</p>
+                    <h5>{{ h.idHotel }}</h5>
+                    <p>Reserve: </p>
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Single</label>
+                            <input name="single" type="number" value="0" />
+                            <input name="hotel" type="number" style="display: none" value="{{ h.idHotel }}" />
+                        </div>
+                        <div class="col-md-6">
+                            <label>Double</label>
+                            <input name="double" type="number" value="0" >
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+                        </div>
+                        <div class="col-md-6">
+                            <input name="reserve" type="submit" class="btn btn-success" value="Reserve" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</section>
+
+    <div class="container" style="margin-bottom: 50px;">
+        <div class="row" style="margin-left: 200px">
+            <div class="col-md-12">
+                <div class="navigation" style="margin-left: 200px">
+                    {{ knp_pagination_render(listHotel) }}
+                </div>
+            </div>
+        </div>
+    </div>
+<!--cta section-->
+<section class="py-4 bg-orange">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Best Place to Find information</h2>
+            </div>
+            <div class="col-md-4">
+                <buttton type="button" class="btn btn-outline-light">Find Out Now</buttton>
+            </div>
+
+        </div>
+    </div>
+</section>
+    </form>
+    <div id="result"> </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script>
+        $('#book').click(function () {
+           /* swal({
+                title: "Hey there",
+                text: "You want to book",
+                icon: "success",
+                button: "Aww yiss!",
+            });*/
+
+        })
+        $('#stat').keyup(function (){
+            var inp=$('#stat').val();
+            if(inp ==""){
+
+
+                $('#f').show();
+                $('#result').html("");
+
+            }
+            else{
+
+
+                $('#f').hide();
+                    $.ajax({
+                        url:'{{ path('hotel_search_ajax') }}',
+                        type:'POST',
+                        data:{"name" :inp},
+                        success:function (data){
+
+                                var output="<table>"+"<tr>"+"<td>"+"name"+"</td>"+"<td>"+"adresse"+"</td>"+"</tr>";
+                                $.each(data,function (key,val) {
+                                    output+="<tr>"+"<td>"+val.namehotel+"</td>"+"<td>"+val.adressehotel+"</td>"+"</tr>";
+
+                                });
+                                output+="<ul>";
+                                $('#result').html(output);
+
+
+                        }});}});
+
+
+
+
+
+
+
+
+
+    </script>
+    {% endblock %}

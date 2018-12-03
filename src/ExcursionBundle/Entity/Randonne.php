@@ -3,12 +3,14 @@
 namespace ExcursionBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Randonne
  *
  * @ORM\Table(name="randonne", uniqueConstraints={@ORM\UniqueConstraint(name="idRandonne", columns={"idRando"})})
  * @ORM\Entity(repositoryClass="ExcursionBundle\Repository\ExcursionRepository")
+ *
  */
 class Randonne
 {
@@ -78,8 +80,10 @@ class Randonne
     private $googlemaps;
 
     /**
+     *
      * @var string
      *
+     * @Assert\Image()
      * @ORM\Column(name="imgUrl1", type="string", length=255, nullable=false)
      */
     private $imgurl1;

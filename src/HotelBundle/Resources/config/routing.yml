@@ -1,0 +1,33 @@
+hotel_read:
+    path:     /readHotel
+    defaults: { _controller: HotelBundle:Hotel:readHotel}
+hotel_create:
+    path:     /createHotel
+    defaults: { _controller: HotelBundle:Hotel:createHotel}
+hotel_delete:
+      path:     /deleteHotel/{id}
+      defaults: { _controller: HotelBundle:Hotel:deleteHotel}
+hotel_update:
+  path:     /updateHotel/{id}
+  defaults: { _controller: HotelBundle:Hotel:updateHotel}
+chambre_read:
+    path:     /readChambre
+    defaults: { _controller: HotelBundle:Chambre:readChambre}
+
+chambre_create:
+    path:     /createChambre/{id}
+    defaults: { _controller: HotelBundle:Chambre:createChambre}
+
+hotel_search:
+  path:     /searchHotel
+  defaults: { _controller: HotelBundle:Hotel:searchHotel}
+hotel_search_ajax:
+  path:     /searchHotelAjax
+  defaults: { _controller: HotelBundle:Hotel:searchHotelAjax}
+reserve_hotel:
+  path:     /reserve/{id}/{sg}/{db}
+  defaults: { _controller: HotelBundle:Hotel:reserve}
+
+
+
+

@@ -9,15 +9,16 @@
     </style>
 <div class="container" style="padding-bottom: 30px">
     <div class="row" style="margin-top: 20px">
-        <div class="col-lg-9"></div>
+        <div class="col-lg-9">
+            {% for c in count %}
+                {{ c.nm }} Result(s) found
+            {% endfor %}
+        </div>
         <div class="col-lg-3">
             <input type="text" class="form-control" style="margin-bottom: 5px" placeholder="Type destination here ...">
         </div>
     </div>
     <div class="row">
-        {% for c in count %}
-        {{ c.nm }}
-        {% endfor %}
     {% for m in randonnes %}
             <div class="col-md-1" ></div>
             <div style="border: 1px solid #ccc; border-radius: 5px; margin-top: 30px; padding-bottom: 10px" class="col-md-3">
@@ -27,7 +28,7 @@
                         {{ m.idrando}}
                         {{ m.destination}}
                     </h4>
-                    <img src="{{ m.imgurl1 }}" class="img-responsive">
+                    <img src="{{ asset('uploads/' ~ m.imgurl1) }}" class="img-responsive">
                     <div class="caption">
                         <div class="row">
                             <div class="col-md-1"></div>
@@ -38,15 +39,16 @@
 
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
-                                <a class="btn btn-primary btn-product" href="{{ path('randonne_show',{'idrando':m.idrando}) }}"><span class="glyphicon glyphicon-thumbs-up"></span> View</a>
+                            <div class="col-md-12">
+                                <a class="btn btn-primary btn-product" href="{{ path('randonne_show',{'idrando':m.idrando}) }}"><span class="glyphicon glyphicon-thumbs-up"></span> View & Enroll</a>
                             </div>
-                            <div class="col-md-6">
-                                <a href="#" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Enroll</a></div>
+
                         </div>
                     </div>
                 </div>
             </div>
+
+
     {% endfor %}
         </div>
 
@@ -55,5 +57,12 @@
 
     </div>
     </div>
+
+{% endblock %}
+
+{% block javascript %}
+
+
+
 
 {% endblock %}

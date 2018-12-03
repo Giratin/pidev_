@@ -5,11 +5,13 @@ imports:
     - { resource: "@ExcursionBundle/Resources/config/services.yml" }
     - { resource: "@UserBundle/Resources/config/services.yml" }
     - { resource: "@AdminBundle/Resources/config/services.yml" }
+    - { resource: "@HotelBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    image_directory: '%kernel.project_dir%/web/uploads/'
 
 framework:
     #esi: ~
@@ -97,8 +99,3 @@ knp_paginator:
 
 vich_uploader:
     db_driver: orm
-    mappings:
-        devis:
-            uri_prefix: /img/
-            upload_destination: '%kernel.root_dir%/../web/img/'
-            namer: vich_uploader.namer_uniqid

@@ -17,4 +17,8 @@ app:
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
+hotel:
+    resource: "@HotelBundle/Resources/config/routing.yml"
+    prefix:   /hotel
+
 

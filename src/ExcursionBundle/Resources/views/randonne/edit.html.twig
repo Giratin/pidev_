@@ -1,21 +1,222 @@
-{% extends 'base.html.twig' %}
+{% extends 'adminPanel.html.twig' %}
 
 {% block body %}
-    <h1>Randonne edit</h1>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+    <div class="row">
 
-    <ul>
-        <li>
-            <a href="{{ path('randonne_index') }}">Back to the list</a>
-        </li>
-        <li>
+        <style>
+            h4{
+                color: #fff;
+            }
+        </style>
+        <h1 style="margin-left:25%; font-family: Lobster; margin-bottom: 15px; color: palevioletred;">Update an excursion</h1>
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6" style="margin-bottom: 100px; background-color: #6BBAB5; box-shadow: 5px -2px 10px;  padding: 25px 100px;">
+            {{ form_start(form) }}
+            <h4>Destination<span style="color: red; "> *</span></h4>
+            {{ form_widget(form.destination  ) }}
+            <!--input type="text" class="form-control" style="margin-bottom: 20px" id="des" name="name" autofocus placeholder="Destination" required=""-->
+            <span id="des_error" style="display: none; color: red; position: absolute; margin-left: 270px; margin-top: -26px"><i class="fa fa-exclamation-triangle"></i></span>
+            <span id="des_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 270px; margin-top: -26px"><i class="fa fa-check-circle"></i></span>
+
+            <h4>Capacity <span style="color: red;"> *</span> </h4>
+            <!--input type="number" class="form-control" style="margin-bottom: 20px" id="cap" name="name" placeholder="Capacity" required=""-->
+            {{ form_widget(form.capacite, {'type' : 'number', 'attr' : {'class' : 'form-control', 'placeholder' : 'Capacity'}}) }}
+            <span id="cap_error" style="display: none; color: red; position: absolute; margin-left: 270px; margin-top: -26px"><i class="fa fa-exclamation-triangle"></i></span>
+            <span id="cap_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 270px; margin-top: -26px"><i class="fa fa-check-circle"></i></span>
+
+            <h4>Date <span style="color: red;"> *</span> </h4>
+            {{ form_widget(form.daterando, {'type' : 'Date', 'attr' : {'class' : 'form-control'}}) }}
+            <!--input id="dt" type="date" class="form-control" style="margin-bottom: 20px" name="name" placeholder="Destination" required=""-->
+            <span id="date_error" style="display: none; color: red; position: absolute; margin-left: 270px; margin-top: -26px"><i class="fa fa-exclamation-triangle"></i></span>
+            <span id="date_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 270px; margin-top: -26px"><i class="fa fa-check-circle"></i></span>
+
+            <h4>Price <span style="color: red;"> *</span> </h4>
+            {{ form_widget(form.prixpersonne, {'type' : 'number', 'attr' : {'class' : 'form-control', 'placeholder' : 'Price (TND)'}}) }}
+            <!--input type="number" id="price" class="form-control" style="margin-bottom: 20px" name="name" placeholder="Price (TND)" required=""-->
+            <span id="price_error" style="display: none; color: red; position: absolute; margin-left: 270px; margin-top: -26px"><i class="fa fa-exclamation-triangle"></i></span>
+            <span id="price_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 270px; margin-top: -26px"><i class="fa fa-check-circle"></i></span>
+
+            <h4 class="control-label">Program <span style="color: red;"> *</span> </h4>
+            {{ form_widget(form.programme, {'type': 'textarea', 'attr' : {'class' : 'form-control', 'placeholder' : 'Program'}}) }}
+            <!--textarea class="form-control" placeholder="Program" style="margin-bottom: 20px"></textarea-->
+
+            <h4 class="control-label">Image 1 <span style="color: red;"> *</span> </h4>
+            {{ form_widget(form.imgurl1) }}
+
+            <h4 class="control-label">Image 2 <span style="color: red;"> *</span> </h4>
+            {{ form_widget(form.imgurl2) }}
+
+            <h4 class="control-label">Image 3 <span style="color: red;"> *</span> </h4>
+            {{ form_widget(form.imgurl3) }}
+
+
+            <div class="clearfix" style="margin-bottom: 20px" ></div>
+            <input type="submit" id="new_excursion" class="btn btn-block" style="background-color: palevioletred; color: white; font-weight: 600; display:block; margin: auto" value="Edit" />
+            <span id="submit_failed" style="border-radius: 5px; font-size: 16px; display: none; width: 210px; margin: auto; color: white; background-color: red; padding: 5px 5px">
+                <i class="fa fa-check-circle"></i>
+                Please verify your entries
+            </span>
+            {{ form_end(form) }}
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+            <input type="submit" class="btn btn-danger btn-block" style=" color: white; font-weight: 600; margin-top: 20px;" value="Delete">
+            {{ form_end(delete_form) }}            <div style="margin-bottom: 20px"></div>
+        </div>
+        <div class="col-lg-3" >
+            <span style="color: red; font-size: 16px; font-weight: 600;">* Required </span>
+        </div>
+    </div>
+
+
+
+            <a href="{{ path('randonne_index') }}">Back to the list</a>
+
+{% endblock %}
+
+{% block javascript %}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" >
+
+    function parseDate(input) {
+        var parts = input.match(/(\d+)/g);
+        return new Date(parts[0], parts[1]-1, parts[2]); // months are 0-based
+    }
+
+function days_between(date1) {
+
+    // The number of milliseconds in one day
+    var ONE_DAY = 1000 * 60 * 60 * 24;
+
+    // Convert both dates to milliseconds
+    var d1 = parseDate(date1);
+    var today =  new Date();
+    console.log( "ddd" + today.getTime());
+    var date1_ms = d1.getTime();
+    var date2_ms = today.getTime();
+
+    // Calculate the difference in milliseconds
+    var difference_ms = Math.abs(date1_ms - date2_ms);
+
+    // Convert back to days and return
+    console.log("day: " + Math.round(difference_ms/ONE_DAY));
+    return Math.round(difference_ms/ONE_DAY);
+}
+
+$('#excursionbundle_randonne_destination').blur(function () {
+    var des =  $('#excursionbundle_randonne_destination').val();
+    if(des.length < 4)
+    {
+        $('#des_error').css("display","block");
+        $('#des_succ').css("display","none");
+        $('#excursionbundle_randonne_destination').css("border","1px red solid");
+    }
+    else{
+        $('#des_error').css("display","none");
+        $('#des_succ').css("display","block");
+        $('#excursionbundle_randonne_destination').css("border","1px green solid");
+    }
+
+});
+
+
+$('#excursionbundle_randonne_capacite').keyup(function () {
+    var cap =  parseInt($('#excursionbundle_randonne_capacite').val());
+    if( cap <= 0 || $('#excursionbundle_randonne_capacite').val().length == 0)
+    {
+        $('#cap_error').css("display","block");
+        $('#excursionbundle_randonne_capacite').css("border","1px red solid");
+        $('#cap_succ').css("display","none");
+    }
+    else
+    {
+        $('#cap_error').css("display","none");
+        $('#excursionbundle_randonne_capacite').css("border","1px green solid");
+        $('#cap_succ').css("display","block");
+    }
+});
+
+
+$('#excursionbundle_randonne_daterando').blur(function () {
+    var today = new Date();
+    var day = $('#excursionbundle_randonne_daterando').val();
+
+    if(Date.parse(day) - Date.parse(new Date()) < 0)
+    {
+        //Date in past
+        console.log("gduima");
+        $('#date_error').css("display","block");
+        $('#excursionbundle_randonne_daterando').css("border","1px red solid");
+        $('#date_succ').css("display","none");
+    }
+    else{
+        //Date in future
+        console.log("it left  " + days_between(day) );
+        $('#date_error').css("display","none");
+        $('#excursionbundle_randonne_daterando').css("border","1px green solid");
+        $('#date_succ').css("display","block");
+    }
+
+});
+
+$('#excursionbundle_randonne_prixpersonne').keyup(function () {
+    var cap =  parseInt($('#excursionbundle_randonne_prixpersonne').val());
+    if( cap <= 0 || $('#excursionbundle_randonne_prixpersonne').val().length == 0)
+    {
+        $('#price_error').css("display","block");
+        $('#excursionbundle_randonne_prixpersonne').css("border","1px red solid");
+        $('#price_succ').css("display","none");
+    }
+    else
+    {
+        $('#price_error').css("display","none");
+        $('#price_succ').css("display","block");
+        $('#excursionbundle_randonne_prixpersonne').css("border","1px green solid");
+    }
+});
+
+
+$('#new_excursion').click(function (e) {
+    var cap =  parseInt($('#excursionbundle_randonne_prixpersonne').val());
+    if( cap <= 0 || $('#excursionbundle_randonne_prixpersonne').val().length < 2)
+    {
+        swal({
+            title: "Error!",
+            text: "You have to verify your entries first!",
+            icon: "error",
+        });
+        $('#submit_failed').css('display','block');
+        e.preventDefault();
+    }
+    else
+    {
+        var date1 = $('#excursionbundle_randonne_daterando').val();
+        //var today = Date.parse(new Date());
+
+        swal({
+            title: "Good job!",
+            text: "You've set all your entries correctly, there is: " + days_between(date1) + " left to this excursion",
+            icon: "success"
+        });
+        $('#submit_failed').css('display','none');
+        //
+    }
+
+    if(
+        $('#des_error').css("display") == "block" ||
+        $('#cap_error').css("display") == "block" ||
+        $('#date_error').css("display") =="block" ||
+        $('#price_error').css("display") == "block"
+    )
+    {
+        swal({
+            title: "Error!",
+            text: "You have to verify your entries first",
+            icon: "error",
+        });
+        $('#submit_failed').css('display','block');
+        e.preventDefault();
+    }
+});
+
+</script>
 {% endblock %}

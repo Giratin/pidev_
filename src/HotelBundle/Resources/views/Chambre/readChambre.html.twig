@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row" style="margin-top: 20px">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <!--<div class="titles-container">
+                    <a href="" data-needsupdate="false">
+                        <div class="lazy" style="background-image: url(&quot;https://images.123movies.com/movies/posters/59592.jpg&quot;);"></div>
+                        <div class="title-info px-2 py-2">
+                            <i class="fas fa-film"></i> Movie
+                        </div>
+                        <div class="go-button align-items-center justify-content-center"></div>
+                        <div class="title text-center p-1">St. George Shoots the Dragon</div>
+                    </a>
+                </div>-->
+
+
+
+                <div class="clearfix"></div>
+                <table class="table table-bordered table-dark">
+                    <thead>
+                    <tr>
+                        <th scope="col">
+                            Type Room</th>
+                        <th scope="col">Number's Room</th>
+                        <th scope="col">Dipo</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        {% for c in listChambre%}
+
+
+
+                        <td>{{ c.typeChambre }}</td>
+                        <td>{{ c.numChambre }}</td>
+                        <td>{{ c.dispo }}</td>
+
+
+
+
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <!--<table border="2">
+                    <tr>
+
+                        <td>typeChambre</td>
+                        <td>numChambre</td>
+                        <td>dispo</td>
+                        <td>id</td>
+
+                    </tr>-->
+
+
+
+                </table>
+                <div class="navigation" style="margin-left: 200px">
+                    {{ knp_pagination_render(listChambre) }}
+
+
+                <div class="clearfix"></div>
+
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,182 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-3">
+            <img  src="{{ asset("images/houtelll.jpg") }}">
+            <img  src="{{ asset("images/houuu2.jpg") }}">
+            <img  src="{{ asset("images/555.jpg") }}">
+            <img  src="{{ asset("images/siri.jpg") }}">
+            <img  src="{{ asset("images/sirin.jpg") }}">
+        </div>
+        <div class="col-md-6" style="margin-top: 50px; padding: 50px 20px">
+            <fieldset style="width:100%; background-color:#fef1ec; padding: 50px 50px" >
+            <h1 style="margin-left:25%; font-family: Lobster; margin-bottom: 15px; color: palevioletred;">Create new Hotel</h1>
+
+            {{ form_start(f) }}
+
+                 <h4>Name : <span style="color: red;"> * </span> </h4>
+            {{ form_widget(f.namehotel  ,{'type' : 'text','attr' : {'class' : 'form-control', 'placeholder' : 'Name...'}}) }}
+            <span id="nom_error" style="display: none; color: red; position: absolute; margin-left: 470px; margin-top: -30px"><i class="fa fa-exclamation-triangle"></i></span>
+            <span id="nom_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 470px; margin-top: -30px"><i class="fa fa-check-circle"></i></span>
+
+            <br>
+                <h4>Adress : <span style="color: red;"> * </span> </h4>
+                {{ form_widget(f.adressehotel ,{'type' : 'text', 'attr' : {'class' : 'form-control', 'placeholder' : 'Adress...'}} ) }}
+            <span id="adresse_error" style="display: none; color: red; position: absolute; margin-left: 470px; margin-top: -30px"><i class="fa fa-exclamation-triangle"></i></span>
+            <span id="adresse_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 470px; margin-top: -30px"><i class="fa fa-check-circle"></i></span>
+
+
+            <br>
+            <h4>Stars Number : <span style="color: red;"> * </span> </h4>
+            {{ form_widget(f.typehotel ,{'type' : 'number', 'attr' : {'class' : 'form-control', 'placeholder' : 'Enter number...'}} ) }}
+            <span id="type_error" style="display: none; color: red; position: absolute; margin-left: 470px; margin-top: -30px"><i class="fa fa-exclamation-triangle"></i></span>
+            <span id="type_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 470px; margin-top: -30px"><i class="fa fa-check-circle"></i></span>
+                <p id="p1" hidden>
+                    enter a number>0!
+
+                </p>
+            <br>
+
+
+
+            <h4> Price(Single) : <span style="color: red;"> * </span> </h4>
+            {{ form_widget(f.prixIndiv ,{'type' : 'number', 'attr' : {'class' : 'form-control', 'placeholder' : 'Enter number...'}} ) }}
+            <span id="pr_error" style="display: none; color: red; position: absolute; margin-left: 470px; margin-top: -30px"><i class="fa fa-exclamation-triangle"></i></span>
+            <span id="pr_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 470px; margin-top: -30px"><i class="fa fa-check-circle"></i></span>
+
+
+            <br>
+            <h4> Price(Double) : <span style="color: red;"> * </span> </h4>
+            {{ form_widget(f.prixDouble,{'type' : 'number', 'attr' : {'class' : 'form-control', 'placeholder' : 'Enter number...'}} ) }}
+            <span id="px_error" style="display: none; color: red; position: absolute; margin-left: 470px; margin-top: -30px"><i class="fa fa-exclamation-triangle"></i></span>
+            <span id="px_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 470px; margin-top: -30px"><i class="fa fa-check-circle"></i></span>
+                <br>
+                <h4> Add image : <span style="color: red;"> * </span> </h4>
+                {{ form_widget(f.imgHotel,{'type' : 'file', 'attr' : {'class' : 'form-control'}} ) }}
+            <br>
+            <input class="btn " id="btn" style="display: block; margin: auto; width: 150px;" type="submit"  value="Create">
+            {{ form_end(f) }}
+
+            </fieldset>
+        </div>
+        <div class="col-md-3">
+            <img  src="{{ asset("images/Hotel.jpg") }}" >
+            <img  src="{{ asset("images/ho1.jpg") }}">
+            <img  src="{{ asset("images/14.jpg") }}">
+            <img  src="{{ asset("images/2s.jpg") }}">
+            <img  src="{{ asset("images/ousa.jpg") }}">
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"> </script>
+
+    <script type="text/javascript" >
+    $("#hotelbundle_hotel_namehotel").keyup(function (){
+        var nom=$("#hotelbundle_hotel_namehotel").val();
+        if((nom.length < 4)||!(isNaN(nom))||(nom[0]!=nom[0].toUpperCase())){
+            $("#nom_error").css("display","block");
+            $('#nom_succ').css("display","none");
+            $('#p1').show();
+        }
+        else{
+            $("#nom_error").css("display","none");
+            $('#nom_succ').css("display","block");
+            $('#p1').hide();
+        }
+
+    });
+
+    $("#hotelbundle_hotel_adressehotel").keyup(function (){
+        var nom=$("#hotelbundle_hotel_adressehotel").val();
+        if((nom.length < 4)||!(isNaN(nom))||(nom[0]!=nom[0].toUpperCase())){
+            $("#adresse_error").css("display","block");
+            $('#adresse_succ').css("display","none");
+            $('#p1').show();
+        }
+        else{
+            $("#adresse_error").css("display","none");
+            $('#adresse_succ').css("display","block");
+            $('#p1').hide();
+        }
+
+    });
+
+
+
+    $("#hotelbundle_hotel_typehotel").keyup(function (){
+        var etoile=$("#hotelbundle_hotel_typehotel").val();
+        if((etoile<=0) ||( etoile>5)){
+            $("#type_error").css("display","block");
+            $('#type_succ').css("display","none");
+            $('#p1').show();
+        }
+        else{
+            $("#type_error").css("display","none");
+            $('#type_succ').css("display","block");
+            $('#p1').hide();
+        }
+
+    });
+
+
+    $("#hotelbundle_hotel_prixIndiv").keyup(function (){
+        var prix_indiv=$("#hotelbundle_hotel_prixIndiv").val();
+        if((prix_indiv<=0) ||( prix_indiv>1000)){
+            $("#pr_error").css("display","block");
+            $('#pr_succ').css("display","none");
+            $('#p1').show();
+        }
+        else{
+            $("#pr_error").css("display","none");
+            $('#pr_succ').css("display","block");
+            $('#p1').hide();
+        }
+
+    });
+    $("#hotelbundle_hotel_prixDouble").keyup(function (){
+        var prix_indiv=$("#hotelbundle_hotel_prixDouble").val();
+        if((prix_indiv<=0) ||( prix_indiv>1000)){
+            $("#px_error").css("display","block");
+            $('#px_succ').css("display","none");
+            $('#p1').show();
+        }
+        else{
+            $("#px_error").css("display","none");
+            $('#px_succ').css("display","block");
+            $('#p1').hide();
+        }
+
+    });
+    $("#btn").click(function (e) {
+        if(($("#px_error").css("display") == "block")||($("#pr_error").css("display") == "block")
+           || ( $("#type_error").css("display") == "block")
+            ||($("#adresse_error").css("display") == "block")
+            ||($("#nom_error").css("display") == "block"))
+        {
+            swal({
+                title: "Wrong!",
+                text: "Please verify entries",
+                icon: "error",
+                button: "Ok",
+            });
+            e.preventDefault();
+        }
+        else if(($("#px_error").css("display") == "none")&&($("#pr_error").css("display") == "none")
+            && ( $("#type_error").css("display") == "none")
+            &&($("#adresse_error").css("display") == "none")
+            &&($("#nom_error").css("display") == "none")){
+            swal({
+                title: "Success!",
+                text: "PYou've successfully added rooms",
+                icon: "success",
+                button: "Ok",
+            });
+        }
+    });
+</script>
+{% endblock %}

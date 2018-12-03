@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<html>
+<head>
+    <style>
+
+    </style>
+</head>
+<body>
+        <fieldset>
+            <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+            <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <!------ Include the above in your HEAD tag ---------->
+
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+            <div class="container">
+                <br/>
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-10 col-lg-8">
+                        <form class="card card-sm">
+                            <div class="card-body row no-gutters align-items-center">
+                                <div class="col-auto">
+                                    <i class="fas fa-search h4 text-body"></i>
+                                </div>
+                                <!--end of col-->
+                                <div class="col">
+                                    <input class="form-control form-control-lg form-control-borderless" name="adresshotel" type="search" id="search_txt" placeholder="Entrer l'adresse de l'hotel">
+                                </div>
+
+                            </div>
+                            <div id="result"></div>
+                        </form>
+                    </div>
+                    <!--end of col-->
+                </div>
+            </div>
+        </fieldset>
+{% endblock %}
+{% block javascripts %}
+    <script type ='text/javascript' src="https://code.jquery.com/jquery-2.2.4.min.js" ></script>
+    <script type="text/javascript">
+        $(document).ready(function (){
+
+            });
+
+        $('#search_txt').keyup(function (){
+            var recherche=$('#search_txt').val();
+            $.ajax({
+                url:'{{ path('hotel_search_ajax') }}',
+                type:'POST',
+                data:{"adresshotel" :recherche},
+                success:function (data){
+                    if(recherche!=""){
+                        var output="<table>"+"<tr>"+"<td>"+"name"+"</td>"+"<td>"+"adresse"+"</td>"+"</tr>";
+                        $.each(data,function (key,val) {
+                            output+="<tr>"+"<td>"+val.namehotel+"</td>"+"<td>"+val.adressehotel+"</td>"+"</tr>";
+
+                        });
+                        output+="<ul>";
+                        $('#result').html(output);
+                    }
+                    else{
+                        $('#result').html("");
+                    }
+
+                },
+
+                error: function () {
+                    alert("an error has recured! ");
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
+
+{% endblock %}

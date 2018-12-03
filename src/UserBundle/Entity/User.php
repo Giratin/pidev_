@@ -441,7 +441,7 @@ class User extends FosUser
      *
      * @return User
      */
-    public function setRoles($roles)
+    public function setRoles(array $roles)
     {
         $this->roles = $roles;
 
