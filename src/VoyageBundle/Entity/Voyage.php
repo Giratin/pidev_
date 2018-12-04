@@ -3,6 +3,7 @@
 namespace VoyageBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Voyage
@@ -15,7 +16,7 @@ class Voyage
     /**
      * @var integer
      *
-     * @ORM\Column(name="idVoyage", type="integer", nullable=false)
+     * @ORM\Column(name="idVoyage", type="integer", nullable=true)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -108,8 +109,9 @@ class Voyage
 
     /**
      * @var string
-     *
+     * @Assert\Image()
      * @ORM\Column(name="image", type="string", length=255, nullable=false)
+     *
      */
     private $image;
     /**

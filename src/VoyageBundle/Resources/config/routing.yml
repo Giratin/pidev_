@@ -19,6 +19,21 @@ voyage_search:
 voyage_search_ajax:
   path:     /searchVoyageajax
   defaults: { _controller: VoyageBundle:Voyage:searchAjax }
+voy_search_ajax:
+  path:     /searchVoyageajax
+  defaults: { _controller: VoyageBundle:Voyage:searchAjaxbydepart }
 voyage_Reserver:
   path:     /reserver
-  defaults: { _controller: VoyageBundle:Reservationvoyage:ReserverVoyage }
+  defaults: { _controller: VoyageBundle:Voyage:reserverVoyage }
+reservation_read:
+  path:     /readreservation/{id}
+  defaults: { _controller: VoyageBundle:Reservationvoyage:reserveRead }
+sandbox_pdfexample:
+  path:     /pdf-example
+  defaults: { _controller: VoyageBundle:Reservationvoyage:pdf }
+reservation_read_User:
+  path:     /readMyReservation
+  defaults: { _controller: VoyageBundle:Reservationvoyage:reserveReadByUser }
+reservation_cancel:
+  path:     /cancelReservation/{id}
+  defaults: { _controller: VoyageBundle:Reservationvoyage:cancelreservation }

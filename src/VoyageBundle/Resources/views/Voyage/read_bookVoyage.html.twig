@@ -1,0 +1,168 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Roboto:400"/>
+{% endblock %}
+
+{% block body %}
+
+<style>
+
+
+
+    .wrapper1 {
+        /*width: 90%;
+        margin: 0 auto;
+        */
+    }
+
+    .container1 {
+        position: relative;
+        float: left;
+        margin: 2%;
+        width: 250px;
+        height: 350px;
+        font-family: 'Roboto', sans-serif;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.65);
+        overflow: hidden;
+    }
+
+    .main-content1 {
+        position: relative;
+        width: auto;
+        height: 100%;
+
+        background-size: cover;
+        transition: all 300ms ease-in-out;
+    }
+    .main-content1 h2 {
+        position: absolute;
+        bottom: 5%;
+        left: 5%;
+        width: 90%;
+        color: #FFF;
+        text-align: center;
+        font-size: 1.8em;
+        border-bottom: 3px solid gold;
+        transition: all 300ms ease-in-out;
+    }
+
+    .side {
+        position: absolute;
+        z-index: 10;
+        left: -100%;
+        width: 187.5px;
+        height: 350px;
+        text-align: center;
+        background: #f1d1b7;
+        transition: all 300ms ease-in-out;
+    }
+    .side h2 {
+        display: inline-block;
+        padding: 10px 5px 0;
+        border-bottom: 3px solid gold;
+        color: #000;
+    }
+    .side ul {
+        position: relative;
+        top: 50%;
+        -webkit-transform: translateY(calc(-50% - 40px));
+        transform: translateY(calc(-50% - 40px));
+    }
+    .side li {
+        margin: 20px 0;
+        list-style-type: circle;
+    }
+    .side li:last-child {
+        padding-top: 20px;
+        font-size: 1.5em;
+        font-weight: 700;
+    }
+
+    .container1:hover .side {
+        left: 0;
+    }
+    .container1:hover .main-content1 {
+        margin-left: 75%;
+    }
+    .container1:hover .main-content1 h2 {
+        opacity: 0;
+        font-size: .5em;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+            {% for v in list %}
+            <div class="wrapper1">
+                <div class="container1">
+                    <div class="side">
+                        <h5>Welcome to our flight</h5>
+                        <ul>
+                            <form method="get" action="">
+
+
+                                </li>
+                                <li>Departing
+                                    <br> {{ v.dateVoyageAller}}
+                                    <br>
+                                    {{ v.hdepartVoyageAller}}—
+                                    {{ v.harriveeVoyageAller}}
+                                </li>
+                                <li>Returning
+                                    <br> {{ v.dateVoyageRetour}}
+                                    <br>
+                                    {{ v.hdepartVoyageRetour}}—
+                                    {{ v.harriveeVoyageRetour}}</li>
+
+                                <li>{{v.prix  }}$</li>
+                                <script>
+                                    function getUrlVars() {
+                                        var vars = {};
+                                        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+                                            vars[key] = value;
+                                        });
+                                        return vars;
+                                    }
+                                </script>
+                                <script src="{{ asset('js/jquery-2.2.3.min.js') }}"></script>
+                                <script>
+                                    $('document').ready(function(){
+                                        $('#nb').val(getUrlVars()['nbPlaceDispo']);
+                                    });
+                                </script>
+                                <input type="text" name="idVoyage" value="{{ v.idVoyage }}" hidden>
+                                <input type="text" id="nb" name="nbre" hidden>
+                                <li><input class="btn" name="book"  type="submit" style="margin-top: -30px; background-color: #f2994a;" value="Book">
+
+                                <script>
+                                    $('#btn').click(function (e) {
+                                        var id = '{{ v.idVoyage }}';
+                                        var path = "/pidev_versionF/web/app_dev.php/voyage/readreservation/"+id;
+                                        var state = {
+                                            "canBeAnything": true
+                                        };
+                                        history.pushState(state, "New Title", path);
+                                        e.preventDefault();
+                                        return true;
+                                    });
+                                </script>
+
+                            </form>
+                        </ul>
+                    </div>
+                    <div class="main-content1" style="background-image: url('{{ asset('uploads/' ~ v.image) }}')">
+                        <br>
+                        <h1 style="margin-left: 30px;">{{ v.compagnie }}</h1>
+
+                        <h2><label style="font-size: 20px">FLIGHT N&deg:{{ v.num }}</label><br>{{ v.departVoyage }}—{{ v.destinationVoyage }}</h2>
+
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

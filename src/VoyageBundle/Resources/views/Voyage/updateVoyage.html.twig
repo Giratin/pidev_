@@ -1,10 +1,80 @@
-{% extends "base.html.twig" %}
-{% block stylesheets %}
+{% extends "adminPanel.html.twig" %}
+
+{% block name %}
+    Flights
+{% endblock %}
+
+{% block stats %}
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-plane fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"></div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('voyage_read') }}">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-plus-square fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"></div>
+                        <div>Create new!</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('voyage_create') }}">
+                <div class="panel-footer">
+                    <span class="pull-left"></span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-red">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-search fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"></div>
+                        <div>Search</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('voyage_search_ajax') }}">
+                <div class="panel-footer">
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+{% endblock %}
+{% block body %}
+
     <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
     <link href="{{ asset("css/style-voya.css") }}" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Barlow:300,400,500" rel="stylesheet">
-{% endblock %}
-{% block body %}
 
     {{ form_start(f) }}
     <h1 class="header-w3ls">

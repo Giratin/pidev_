@@ -1,5 +1,225 @@
-{% extends "base.html.twig" %}
+{% extends 'adminPanel.html.twig' %}
+
+ {% block Title %}
+     Flights
+ {% endblock %}
+
+{% block stats %}
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-plane fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"></div>
+                        <div>View Available</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('voyage_read') }}">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-plus-square fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"></div>
+                        <div>Create new!</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('voyage_create') }}">
+                <div class="panel-footer">
+                    <span class="pull-left"></span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-red">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-search fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"></div>
+                        <div>Search</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('voyage_search_ajax') }}">
+                <div class="panel-footer">
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+{% endblock %}
 {% block body %}
+<style>
+    @import url("https://fonts.googleapis.com/css?family=Roboto:100,400");
+    /*html, * {
+        box-sizing: border-box;
+        font-size: 16px;
+    }
+
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Roboto', sans-serif;
+    }*/
+
+    .flight-card {
+        width: 805px;
+        height: 610px;
+        margin: 100px auto;
+        border-radius: 50px;
+        overflow: hidden;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    }
+    .flight-card .flight-card-header {
+        height: 300px;
+        width: 100%;
+        background: linear-gradient(to bottom, #264b76 0%, #937b7b 100%);
+        padding: 30px 50px;
+        border-bottom: 7px solid #f5c6cb;
+        position: relative;
+    }
+    .flight-card .flight-card-header .flight-logo {
+        height: 110px;
+        width: 100%;
+    }
+    .flight-card .flight-card-header .flight-logo img {
+        width: 150px;
+    }
+    .flight-card .flight-card-header .flight-data {
+        height: auto;
+        border-top: 2px solid burlywood;
+        padding-top: 1em;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        text-align: left;
+    }
+    .flight-card .flight-card-header .flight-data span {
+        display: block;
+    }
+    .flight-card .flight-card-header .flight-data .title {
+        color: #838EA8;
+        font-size: 16px;
+    }
+    .flight-card .flight-card-header .flight-data .detail {
+        font-size: 18px;
+        padding-top: 3px;
+        color: white;
+    }
+    .flight-card .flight-card-content {
+        width: 100%;
+        height: auto;
+        display: inline-block;
+    }
+    .flight-card .flight-card-content .flight-row {
+        width: 100%;
+        padding: 50px 50px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        background-color: lightgrey;
+    }
+    .flight-card .flight-card-content .flight-row .plane {
+        text-align: center;
+        position: relative;
+    }
+    .flight-card .flight-card-content .flight-row .plane img {
+        width: 90px;
+    }
+    .flight-card .flight-card-content .flight-row .plane:before {
+        content: '';
+        width: 135px;
+        height: 3px;
+        background: #efefef;
+        position: absolute;
+        top: 45px;
+        left: -75px;
+    }
+    .flight-card .flight-card-content .flight-row .plane:after {
+        content: '';
+        width: 135px;
+        height: 3px;
+        background-color: #efefef;
+        position: absolute;
+        top: 45px;
+        right: -75px;
+    }
+    .flight-card .flight-card-content .flight-from {
+        text-align: left;
+        float: left;
+    }
+    .flight-card .flight-card-content .flight-to {
+        text-align: right;
+        float: right;
+    }
+    .flight-card .flight-card-content .flight-from span, .flight-card .flight-card-content .flight-to span {
+        display: block;
+    }
+    .flight-card .flight-card-content .flight-from .from-code, .flight-card .flight-card-content .flight-from .to-code, .flight-card .flight-card-content .flight-to .from-code, .flight-card .flight-card-content .flight-to .to-code {
+        font-size: 60px;
+        color: #002C5F;
+        font-weight: 200;
+    }
+    .flight-card .flight-card-content .flight-from .from-city, .flight-card .flight-card-content .flight-from .to-city, .flight-card .flight-card-content .flight-to .from-city, .flight-card .flight-card-content .flight-to .to-city {
+        font-size: 18px;
+        color: #002C5F;
+        font-weight: 400;
+    }
+    .flight-card .flight-card-content .flight-details-row {
+        width: 100%;
+        display: grid;
+        padding: 30px 50px;
+        grid-template-columns: 1fr 1fr 1fr;
+        background-color: whitesmoke;
+    }
+    .flight-card .flight-card-content .flight-details-row span {
+        display: block;
+    }
+    .flight-card .flight-card-content .flight-details-row .title {
+        color: #6a8597;
+        font-size: 16px;
+        letter-spacing: 3px;
+    }
+    .flight-card .flight-card-content .flight-details-row .detail {
+        margin-top: .2em;
+        color: #002C5F;
+        font-size: 18px;
+    }
+    .flight-card .flight-card-content .flight-details-row .flight-operator {
+        text-align: left;
+        float: left;
+    }
+    .flight-card .flight-card-content .flight-details-row .flight-class {
+        float: right;
+        text-align: right;
+    }
+    .flight-card .flight-card-content .flight-details-row .flight-number {
+        padding-left: 80px;
+    }
+</style>
+<center>
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -24,12 +244,10 @@
             </div>
 
         </form>
-        <button >
-            <a href="{{ path ('voyage_Reserver')}}">Click here for Booking</a> </button>
+
 
     </div>
-    {% endblock %}
-    {% block javascripts %}
+
 
     <script type="text/javascript" src="{{ asset('js/jquery-2.2.3.min.js') }}">
     </script>
@@ -37,6 +255,7 @@
 
         $(document).ready(function () {
             $('#search_text').keyup(function(){
+                console.log('cv pas');
                 var search = $('#search_text').val();
                 $.ajax({
                     url:"{{ path('voyage_search_ajax') }}",
@@ -49,46 +268,71 @@
                         if(search!=""){
                             console.log('cv');
 
-                            var output =
-                                "<div class='table-responsive'>"+
-                                "<table id='tab' class='table table bordered'>"+
-                                " <tr style='color: saddlebrown'>"+
-                                " <th>"+"Flight's number"+"</th>"+
-                                " <th>"+"Destination"+"</th>"+
-                                "<th>"+"Departure"+"</th>"+
-                                "<th>"+"Company"+"</th>"+
-                                "<th>"+"Departure Date"+"</th>"+
-                                "<th>"+"Departure houre/Go "+"</th>"+
-                                "<th>"+"Arrival houre/Go"+"</th>"+
-                                "<th>"+"Arrival date"+"</th>"+
-                                "<th>"+"Departure houre/Back"+"</th>"+
-                                "<th>"+"Arrival houre/Back"+"</th>"+
-                                "<th>"+"Price"+"</th>"+
-                                "<th>"+"Action";
+                            var output ="";
                             $.each(data,function(key,val){
                                 var id=val.idvoyage;
-                                var path = '{{ path("voyage_update", {'id': 'xxx'}) }}'
-                                path = path.replace("xxx", id);
+                               var path='{{ path("voyage_update",{'id':'xxx'}) }}';
+                                path=path.replace("xxx",id);
+                                console.log(val.departVoyage);
 
-                                output+=
-                                    "<a href=''>" +
-                                    "<tr >"+
-                                        "<td style='color: darkorange'>"+val.num+
-                                        "<td>"+val.destinationvoyage+ "</td>"+
-                                        "<td>"+val.departvoyage+"</td>"+
-                                        "<td>"+val.compagnie+"</td>"+
-                                        "<td>"+val.+datevoyagealler+"</td>"+
-                                        "<td>"+val.hdepartvoyagealler+ "</td>"+
-                                        "<td>"+val.harriveevoyagealler+"</td>"+
-                                        "<td>"+val.datevoyageretour+"</td>"+
-                                        "<td>"+val.hdepartvoyageretour+"</td>"+
-                                        "<td>"+val.harriveevoyageretour+"</td>"+
-                                        "<td >"+val.prix+"</td>"+
-                                        "<td><a href='" + path + "'> update </a></td>"+
-                                    "</tr> visit </a>";
-
-
-
+                           output+="<div class='flight-card'>"+"<div class='flight-card-header'>"+"<div class='flight-logo'>"+"<div>"+"<a  href='"+path+"' value='Update'  style='color: #d1b993;margin-left: 100px ;margin-top:-250px;border-color: powderblue'>Update</a>"+
+                               "<a href='"+path+"' value='Delete' style='color: #d1b993;margin-left: 40px'>"+"Delete"+"</a>"+
+                                    "<span class='title' style='font-size: 50px; margin-left: -600px'>"+val.compagnie +"</span>"+"</div>"+
+                               "</div>"+
+                               "<div class='flight-data'>"+
+                                "<div class='passanger-details'>"+
+                                "<span class='title'>Departing Date :</span>"+
+                                "<span class='detail'>"+val.datevoyagealler+"</span>"+
+                                   "<span class='title'>Returning Date :</span>" +
+                                "<span class='detail'>"+val.datevoyageretour+"</span>"+
+                                "</div>"+
+                                "<div class='passanger-depart'>"+
+                                "<span class='title'>Departing houre :</span>"+
+                               "<span class='detail'>"+val.hdepartvoyagealler+" </span>"+
+                                "<span class='title'>Departing houre :</span>"+
+                                "<span class='detail'>"+val.hdepartvoyageretour+"</span>"+
+                                   "</div>"+
+                                    "<div class='passanger-arrives'>"+
+                                "<span class='title'>Arrival houre :</span>"+
+                                "<span class='detail'>"+val.harriveevoyagealler+"</span>"+
+                                "<span class='title'>Arrival houre :</span>"+
+                                "<span class='detail'>"+val.harriveevoyageretour+"</span>"+
+                                "</div>"+
+                                "<div class='passanger-depart'>"+
+                               "</div>"+
+                                "<div class='passanger-arrives'>"+"</div>"+
+                                "</div>"+
+                                "</div>"+
+                                "<div class='flight-card-content'>"+
+                                "<div class='flight-row'>"+
+                                "<div class='flight-from'>"+
+                                "<span class='from-code'>From :</span>"+
+                               "<span class='from-city'>" +val.departvoyage+"</span>"+
+                                "</div>"+
+                                "<div class='plane'>"+
+                                "<img src='https://cdn.onlinewebfonts.com/svg/img_537856.svg' alt=''>"+
+                                "</div>"+
+                                "<div class='flight-to'>"+
+                                "<span class='to-code'>To :</span>"+
+                                "<span class='to-city'>"+val.destinationvoyage+"</span>"+
+                                "</div>"+
+                                "</div>"+
+                                "<div class='flight-details-row'>"+
+                                "<div class='flight-operator'>"+
+                                "<span class='title'>Price</span>"+
+                                "<span class='detail'>"+val.prix+"</span>"+
+                                "</div>"+
+                               "<div class='flight-number'>"+
+                                "<span class='title'>FLIGHT</span>"+
+                                "<span class='detail'>"+val.num+"</span>"+
+                                "</div>"+
+                                "<div class='flight-class'>"+
+                                "<span class='title'>Places number :</span>"+
+                                "<span class='detail'>"+val.nbPlaceDispo+"</span>"+
+                               "</div>"+
+                                "</div>"+
+                                "</div>"+
+                                "</div>";
 
 
 
@@ -107,11 +351,11 @@
                         }
                     }
 
+
                 });});});
 
 
     </script>
-
+</center>
 {% endblock %}
-
 

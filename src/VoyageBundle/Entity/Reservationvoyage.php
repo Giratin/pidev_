@@ -23,7 +23,7 @@ class Reservationvoyage
 
     /**
      * @ORM\ManyToOne(targetEntity="Voyage")
-     * @ORM\JoinColumn(name="voyage_id",referencedColumnName="idvoyage")
+     * @ORM\JoinColumn(name="idVoyage",referencedColumnName="idVoyage")
      */
     private $voyage;
 

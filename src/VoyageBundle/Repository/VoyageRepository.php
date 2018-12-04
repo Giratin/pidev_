@@ -15,12 +15,48 @@ namespace VoyageBundle\Repository;
  */
 class VoyageRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function MyfindAll($destination){
+
+    public function MyfindAllbydestination($destination){
         $query=$this->getEntityManager()
-            ->createQuery("select m from VoyageBundle:Voyage m where m.destinationvoyage like :destination");
+            ->createQuery("select distinct m from VoyageBundle:Voyage m where m.destinationvoyage like :destination");
         $query->setParameter(":destination",'%'.$destination.'%');
         return $query->getResult();
     }
+
+    public function MyfindAllbydepart($depart){
+        $query=$this->getEntityManager()
+            ->createQuery("select distinct m from VoyageBundle:Voyage m where m.departvoyage like :depart");
+        $query->setParameter(":despart",'%'.$depart.'%');
+        return $query->getResult();
+    }
+
+    public function MyfindAllvoyage($destination,$depart,$datedep,$dateretour,$nbplace){
+        $query=$this->getEntityManager()
+            ->createQuery("select m from VoyageBundle:Voyage m where m.destinationvoyage ='$destination' and m.departvoyage = '$depart' and m.datevoyagealler = '$datedep' and m.datevoyageretour = '$dateretour' and m.nbPlaceDispo >= :nb");
+        $query->setParameter('nb',$nbplace);
+        return $query->getResult();
+    }
+
+    public function voyageFind($id)
+    {
+        $query=$this->getEntityManager()
+            ->createQuery("select m from VoyageBundle:Voyage m where m.idvoyage = :id");
+
+        $query->setParameter(":id",$id);
+        return $query->getResult();
+    }
+
+    public function countVoyage($destination,$depart,$datedep,$dateretour){
+        $query=$this->getEntityManager()->createQuery("SELECT count(m.idvoyage) as nmbre from VoyageBundle:Voyage m where m.destinationvoyage ='$destination' and m.departvoyage = '$depart' and m.datevoyagealler = '$datedep' and m.datevoyageretour = '$dateretour'");
+        return $query->getResult();
+    }
+
+    public function Myfindvoyage($destination,$depart,$datedep,$dateretour){
+        $query=$this->getEntityManager()
+            ->createQuery("select m from VoyageBundle:Voyage m where m.destinationvoyage ='$destination' and m.departvoyage = '$depart' and m.datevoyagealler = '$datedep' and m.datevoyageretour = '$dateretour'");
+        return $query->getResult();
+    }
+
 
 
 }
