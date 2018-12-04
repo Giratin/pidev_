@@ -1,0 +1,126 @@
+{% extends 'adminPanel.html.twig' %}
+{% block Title %}
+    Activity
+{% endblock %}
+
+{% block stats %}
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-plus-square fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">&emsp;</div>
+                        <div>New Activity Type</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('createType_activity') }}">
+                <div class="panel-footer">
+                    <span class="pull-left">Add new</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-tasks fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">&emsp;</div>
+                        <div>New activity!</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('create_activity') }}">
+                <div class="panel-footer">
+                    <span class="pull-left">Add new</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-search fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">&emsp;</div>
+                        <div>Search</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('search_activity') }}">
+                <div class="panel-footer">
+                    <span class="pull-left">Perform a search</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-red">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-support fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">&emsp;</div>
+                        <div>View List</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('read_activity') }}">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <center>
+    <div style="margin-bottom: 50px; margin-top: 40px">
+    <h1>The List of Activities</h1>
+
+    <table class="table table-striped custab">
+        <tr>
+            <th class="text-center">Activity's adress</th>
+
+            <th class="text-center">Activity's type</th>
+            <th class="text-center">Description</th>
+            <th class="text-center">Activity's image</th>
+            <th class="text-center">Update</th>
+            <th class="text-center">Delete</th>
+            </tr>
+       {% for A in activity %}
+           <tr>
+
+        <td>{{ A.adresseactivite }}</td>
+               <td>{{ A.typeactivite.typeName }}</td>
+               <td>{{ A.description }}</td>
+               <td><img src="{{ asset ('uploadsuploadsuploads/') }}{{ A.imagActivity }}" style="width:30px;height: 30px"></td>
+               <td><a class="btn btn-primary" href="{{ path('update_activity',{'idActivite':A.idActivite}) }}">Update</a></td>
+               <td><a class="btn btn-danger" href="{{ path('delete_activity',{'idActivite':A.idActivite}) }}">Delete</a></td>
+           </tr>
+        {% endfor %}
+    </table>
+    </div>
+</center>
+{% endblock %}

@@ -1,0 +1,38 @@
+activity_homepage:
+    path:     /
+    defaults: { _controller: ActivityBundle:Activity:list }
+read_activity:
+    path:     /readac
+    defaults: { _controller: ActivityBundle:Activity:read }
+create_activity:
+    path:     /createac
+    defaults: { _controller: ActivityBundle:Activity:create }
+update_activity:
+    path:     /updateac{idActivite}
+    defaults: { _controller: ActivityBundle:Activity:update }
+delete_activity:
+    path:     /deleteac{idActivite}
+    defaults: { _controller: ActivityBundle:Activity:delete }
+search_activity:
+    path:     /search
+    defaults: { _controller: ActivityBundle:Activity:search }
+list_activity:
+    path:     /list
+    defaults: { _controller: ActivityBundle:Activity:list }
+searchAjax_activity:
+    path:     /searchAjax
+    defaults: { _controller: ActivityBundle:Activity:searchAjax }
+
+createType_activity:
+    path:     /createT
+    defaults: { _controller: ActivityBundle:ActivityType:createType }
+readType_activity:
+    path:     /readT
+    defaults: { _controller: ActivityBundle:ActivityType:readType }
+updateType_activity:
+    path:     /updateT/{idType}
+    defaults: { _controller: ActivityBundle:ActivityType:updateType }
+deleteType_activity:
+    path:     /deleteT/{idType}
+    defaults: { _controller: ActivityBundle:ActivityType:deleteType }
+

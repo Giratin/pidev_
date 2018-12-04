@@ -1,0 +1,22 @@
+{% extends 'adminPanel.html.twig' %}
+{% block body %}
+    <center>
+        <div style="margin-bottom: 50px; margin-top: 40px">
+            <h1 style="margin-bottom: 20px"> Liste des categories</h1>
+            <table class="table table-striped custab">
+                <tr><th>id</th><th>nom</th><th>modification</th><th>suppression</th></tr>
+                {% for m in typeactivity %}
+                    <tr>
+                        <td>{{ m.idType }}</td>
+
+                        <td>{{ m.typeName}}</td>
+
+                        <td><a class="btn btn-info" href="{{ path('updateType_activity',{'idType':m.idType })}}">Update</a></td>
+                        <td><a class="btn btn-danger" href="{{ path('deleteType_activity',{'idType':m.idType })}}">Delete</a></td>
+
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </center>
+{% endblock %}

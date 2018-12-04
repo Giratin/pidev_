@@ -1,0 +1,119 @@
+{% extends'adminPanel.html.twig' %}
+{% block Title %}
+    Activity
+{% endblock %}
+
+{% block stats %}
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-plus-square fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">&emsp;</div>
+                        <div>New Activity Type</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('createType_activity') }}">
+                <div class="panel-footer">
+                    <span class="pull-left">Add new</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-tasks fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">&emsp;</div>
+                        <div>New activity!</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('create_activity') }}">
+                <div class="panel-footer">
+                    <span class="pull-left">Add new</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-search fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">&emsp;</div>
+                        <div>Search</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('search_activity') }}">
+                <div class="panel-footer">
+                    <span class="pull-left">Perform a search</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-red">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-support fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">&emsp;</div>
+                        <div>View List</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('read_activity') }}">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+{% endblock %}
+{% block body %}
+<style>
+    body{
+        overflow-x: hidden;
+    }
+</style>
+
+    <div class="container" style="margin-top: 40px;">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <form method="get">
+                            <label>Address</label>
+                             <input class="form-control" type="text" style="width: 200px;" name="type">
+                            <div class="clearfix" style="margin-top: 2px"></div>
+                            <button type="submit" style="float: right; margin-right: 160px;" class="btn btn-primary">search</button>
+
+                </form>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+
+{% endblock %}

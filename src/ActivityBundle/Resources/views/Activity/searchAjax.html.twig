@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<form> <input id="C" type="text" placeholder="address" style="margin-left: 30px;margin-top: 30px"></form>
+
+    <div class="div" id="div">
+
+
+    </div>
+    <div class="container" style="margin-top: 40px; margin-bottom: 50px">
+    <div class="row"  style="margin-left: 40px">
+    <script src="{{ asset("js/jquery-2.2.3.min.js") }}"></script>
+    <script>
+        $("#C").keyup(function () {
+            //recuperation de la valeur
+            var input=$("#C").val();
+            //requete
+            $.ajax({
+                url:"{{ path('searchAjax_activity') }}",
+                type:"POST",
+                data:{'adresseactivite':input},
+                success:function (data) {
+                    console.log(data);
+                    $("#dix").html("<table id='res' border='1'>"+
+                    "<td>Activity's address</td>"+
+                            "<td>Activity's type</td>"+
+                            "<td>Activity's description</td></table>");
+                    $.each(data,function(k,act){
+                        $("#res").append(
+                            "<tr>"+
+                                "<td>"+act.address+"</td>"+
+                                "<td>"+act.type+"</td>"+
+                                "<td>"+act.description+"</td>"+"</tr>"+"</table>"
+                        )
+                    })
+                }
+
+            });
+
+        });
+
+    </script>
+
+{% endblock %}

@@ -1,0 +1,140 @@
+{% extends 'adminPanel.html.twig' %}
+{% block Title %}
+    Activity
+{% endblock %}
+
+{% block stats %}
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-plus-square fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">&emsp;</div>
+                        <div>New Activity Type</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('createType_activity') }}">
+                <div class="panel-footer">
+                    <span class="pull-left">Add new</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-tasks fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">&emsp;</div>
+                        <div>New activity!</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('create_activity') }}">
+                <div class="panel-footer">
+                    <span class="pull-left">Add new</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-search fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">&emsp;</div>
+                        <div>Search</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('search_activity') }}">
+                <div class="panel-footer">
+                    <span class="pull-left">Perform a search</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-red">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-support fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">&emsp;</div>
+                        <div>View List</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('read_activity') }}">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                {{ form_start(form) }}
+                <h1 style="color:darkslategray; margin-bottom: 20px">Add an activity type</h1>
+
+                {{ form_widget(form.typeName, {'attr' : {'class' : 'form-control'}}) }}
+                <span id="typeName_error" style="display: none; color: red; position: absolute; margin-left: 270px; margin-top: -26px"><i class="fa fa-exclamation-triangle"></i></span>
+                <span id="typeName_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 270px; margin-top: -26px"><i class="fa fa-check-circle"></i></span>
+                <input id="create" class="btn btn-primary" style="float: right; margin-top: 15px" type="submit" value="Add activity">
+                {{ form_end(form) }}
+
+                <script src="{{ asset('js/jquery-2.2.3.min.js') }}"></script>
+
+                <script type="text/javascript" >
+                    $('#activitybundle_activitytype_typeName').keyup(function (){
+                        var type=$('#activitybundle_activitytype_typeName').val();
+                        if(!isNaN(type)){
+                            $("#typeName_error").css("display","block");
+                            $("#typeName_succ").css("display","none");
+                        }
+                        else{
+                            $("#typeName_error").css("display","none");
+                            $("#typeName_succ").css("display","block");
+                        }
+
+                    });
+                    $('#create').click(function (e) {
+                        if(
+                            $('#typeName_error').css("display") == "block"
+                        )
+                        {
+                            alert('the activity type can not be a number, please try again')
+                            //$('#submit_failed').css('display','block');
+                            e.preventDefault();
+                        }
+                    });
+                </script>
+            </div>
+            <div class="col-md-8"></div>
+        </div>
+    </div>
+
+{% endblock %}
