@@ -1,0 +1,237 @@
+{% extends 'adminPanel.html.twig' %}
+{% block Title %}
+    Activity
+{% endblock %}
+
+{% block stats %}
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-plus-square fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">&emsp;</div>
+                        <div>New Activity Type</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('createType_activity') }}">
+                <div class="panel-footer">
+                    <span class="pull-left">Add new</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-tasks fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">&emsp;</div>
+                        <div>New activity!</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('create_activity') }}">
+                <div class="panel-footer">
+                    <span class="pull-left">Add new</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-search fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">&emsp;</div>
+                        <div>Search</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('search_activity') }}">
+                <div class="panel-footer">
+                    <span class="pull-left">Perform a search</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-red">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-support fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">&emsp;</div>
+                        <div>View List</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('read_activity') }}">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+{% endblock %}
+{% block body %}
+
+    <style>
+        body{
+            overflow-x: hidden;
+        }
+    </style>
+    <div class="container">
+        <div class="row" style="margin-bottom: 40px">
+            <div class="col-md-4" style="border: 1px solid #5cb85c; border-radius: 5px">
+                <h3 style="color: #5cb85c">Update your activity</h3>
+                <hr>
+                {{ form_start(form) }}
+
+                <div class="clearfix" style="margin-top: 25px"></div>
+                <label>Activity adress:<span style="color: red; "> *</span></label>
+                {{ form_widget(form.adresseactivite, {'attr' : {'class' : 'form-control'}}) }}
+                <span id="actadress_error" style="display: none; color: red; position: absolute; margin-left: 270px; margin-top: -26px"><i class="fa fa-exclamation-triangle"></i></span>
+                <span id="actadress_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 270px; margin-top: -26px"><i class="fa fa-check-circle"></i></span>
+
+                <div class="clearfix" style="margin-top: 25px"></div>
+                <label>Activity Type:<span style="color: red; "> *</span></label>
+                {{ form_widget(form.typeactivite, {'attr' : {'class' : 'form-control'}}) }}
+                <span id="acttype_error" style="display: none; color: red; position: absolute; margin-left: 270px; margin-top: -26px"><i class="fa fa-exclamation-triangle"></i></span>
+                <span id="acttype_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 270px; margin-top: -26px"><i class="fa fa-check-circle"></i></span>
+
+                <div class="clearfix" style="margin-top: 25px"></div>
+                <label>Activity Description:<span style="color: red; "> *</span></label>
+                {{ form_widget(form.description, {'attr' : {'class' : 'form-control', 'style' : 'height: 100px'}}) }}
+                <span id="actdes_error" style="display: none; color: red; position: absolute; margin-left: 270px; margin-top: -26px"><i class="fa fa-exclamation-triangle"></i></span>
+                <span id="actdes_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 270px; margin-top: -26px"><i class="fa fa-check-circle"></i></span>
+
+                <div class="clearfix" style="margin-top: 25px"></div>
+                <label>Choose an activity picture:<span style="color: red; "> *</span></label>
+                {{ form_widget(form.file, {'attr' : {'class' : 'form-control'}}) }}
+                <div class="clearfix" style="margin-top: 25px"></div>
+                <input id="btn" style="float: right; margin-bottom: 10px" class="btn btn-primary" type="submit" value="Add activity">
+
+                {{ form_end(form) }}
+
+                <script src="{{ asset('js/jquery-2.2.3.min.js') }}"></script>
+
+                <script type="text/javascript" >
+
+                    $('#activitybundle_activity_adresseactivite').keyup(function (){
+                        var act=$('#activitybundle_activity_adresseactivite').val();
+                        if(!isNaN(act)){
+                            $("#actadress_error").css("display","block");
+                            $("#actadress_succ").css("display","none");
+                        }
+                        else{
+                            $("#actadress_error").css("display","none");
+                            $("#actadress_succ").css("display","block");
+                        }
+
+                    });
+                    $('#activitybundle_activity_typeactivite').keyup(function () {
+                        var act=$('#activitybundle_activity_typeactivite').val();
+                        if(!isNaN(act))
+                        {
+                            $("#acttype_error").css("display","block");
+                            $("#acttype_succ").css("display","none");
+                        }
+                        else
+                        {
+                            $("#acttype_error").css("display","none");
+                            $("#acttype_succ").css("display","block");
+                        }
+
+                    });
+                    $('#activitybundle_activity_typeactivite').keyup(function () {
+                        var act=$('#activitybundle_activity_typeactivite').val();
+                        if(!isNaN(act))
+                        {
+                            $("#acttype_error").css("display","block");
+                            $("#acttype_succ").css("display","none");
+                        }
+                        else
+                        {
+                            $("#acttype_error").css("display","none");
+                            $("#acttype_succ").css("display","block");
+                        }
+
+                    });
+                    $('#activitybundle_activity_description').keyup(function () {
+                        var act=$('#activitybundle_activity_description').val();
+                        if(!isNaN(act))
+                        {
+                            $("#actdes_error").css("display","block");
+                            $("#actdes_succ").css("display","none");
+                        }
+                        else
+                        {
+                            $("#actdes_error").css("display","none");
+                            $("#actdes_succ").css("display","block");
+                        }
+
+                    });
+
+                    $('#activitybundle_activity_adresseactivite').keyup(function (){
+                        var act=$('#activitybundle_activity_adresseactivite').val();
+                        if(!isNaN(act)){
+                            $("#actadress_error").css("display","block");
+                            $("#actadress_succ").css("display","none");
+                        }
+                        else{
+                            $("#actadress_error").css("display","none");
+                            $("#actadress_succ").css("display","block");
+                        }
+
+                    });
+                    $('#btn').click(function (e) {
+                        if(
+                            $('#actadress_error').css("display") == "block" ||
+                            $('#acttype_error').css("display") == "block" ||
+                            $('#actdes_error').css("display") == "block" ||
+                            $('#actdes_error').css("display") =="block" ||
+                            $('#actadress_error').css("display") == "block"
+                        )
+                        {
+                            alert('Please verify your inputs')
+                            //$('#submit_failed').css('display','block');
+                            e.preventDefault();
+                        }
+                    });
+
+
+
+                </script>
+
+            </div>
+            <div class="col-md-8"></div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+
+
+

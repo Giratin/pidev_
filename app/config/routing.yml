@@ -25,4 +25,6 @@ event:
     resource: "@EventBundle/Resources/config/routing.yml"
     prefix:   /event
 
-
+activity:
+    resource: "@ActivityBundle/Resources/config/routing.yml"
+    prefix:   /activite
