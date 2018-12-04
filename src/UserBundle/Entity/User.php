@@ -9,7 +9,7 @@ use FOS\UserBundle\Model\User as FosUser;
  * User
  *
  * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_957A647992FC23A8", columns={"username_canonical"}), @ORM\UniqueConstraint(name="UNIQ_957A6479A0D96FBF", columns={"email_canonical"})}, indexes={@ORM\Index(name="username_canonical", columns={"username_canonical"}), @ORM\Index(name="username_canonical_2", columns={"username_canonical"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
  */
 class User extends FosUser
 {

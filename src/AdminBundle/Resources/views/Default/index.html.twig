@@ -4,7 +4,72 @@
     <a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
 {% endblock %}
 
+
 {% block name %}
 
+{% endblock %}
+
+{% block stats %}
+    {% for t in top %}
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-history fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">{{ t.destination }}</div>
+                            <div>Top Excursion!</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="panel-footer">
+                        <span class="pull-left"></span>
+                        <span class="pull-right">{{ t.nbreclient }} of {{ t.capacite }} place available</span>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block table %}
+    {% for g in gain %}
+        <tr>
+            <td>{{ g.idrando }}</td>
+            <td>{{ g.daterando }}</td>
+            <td>{{ g.destination }}</td>
+            <td>{{ g.nbreclient }}</td>
+            <td>{{ g.prixpersonne*g.nbreclient }}</td>
+        </tr>
+    {% endfor %}
+
+    <div id="div_chart"></div>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        {{ gc_draw(chart, 'div_chart') }}
+    </script>
+{% endblock %}
+
+{% block tableOld %}
+    {% for g in old %}
+        <tr>
+            <td>{{ g.idrando }}</td>
+            <td>{{ g.daterando }}</td>
+            <td>{{ g.destination }}</td>
+            <td>{{ g.nbreclient }}</td>
+            <td>{{ g.prixpersonne*g.nbreclient }}</td>
+        </tr>
+    {% endfor %}
+
+    <div id="div_chart2"></div>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        {{ gc_draw(col, 'div_chart2') }}
+    </script>
 {% endblock %}
 

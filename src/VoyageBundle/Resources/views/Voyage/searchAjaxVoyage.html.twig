@@ -1,0 +1,117 @@
+{% extends "base.html.twig" %}
+{% block body %}
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <script src="{{ asset("https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js") }}"></script>
+        <script src={{ asset("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js") }}></script>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+    </head>
+    <div class="container">
+        <br />
+        <h2 align="center">Search Journey By Destination</h2><br />
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon">Search</span>
+                <input type="text" name="search_text" id="search_text" placeholder="Search by destination" class="form-control" />
+            </div>
+        </div>
+
+        <br />
+        <form>
+            <div id="result">
+            </div>
+
+        </form>
+        <button >
+            <a href="{{ path ('voyage_Reserver')}}">Click here for Booking</a> </button>
+
+    </div>
+    {% endblock %}
+    {% block javascripts %}
+
+    <script type="text/javascript" src="{{ asset('js/jquery-2.2.3.min.js') }}">
+    </script>
+    <script  type="text/javascript" >
+
+        $(document).ready(function () {
+            $('#search_text').keyup(function(){
+                var search = $('#search_text').val();
+                $.ajax({
+                    url:"{{ path('voyage_search_ajax') }}",
+                    type:'POST',
+                    data:{'destination':search},
+
+                    success:function(data)
+                    {
+
+                        if(search!=""){
+                            console.log('cv');
+
+                            var output =
+                                "<div class='table-responsive'>"+
+                                "<table id='tab' class='table table bordered'>"+
+                                " <tr style='color: saddlebrown'>"+
+                                " <th>"+"Flight's number"+"</th>"+
+                                " <th>"+"Destination"+"</th>"+
+                                "<th>"+"Departure"+"</th>"+
+                                "<th>"+"Company"+"</th>"+
+                                "<th>"+"Departure Date"+"</th>"+
+                                "<th>"+"Departure houre/Go "+"</th>"+
+                                "<th>"+"Arrival houre/Go"+"</th>"+
+                                "<th>"+"Arrival date"+"</th>"+
+                                "<th>"+"Departure houre/Back"+"</th>"+
+                                "<th>"+"Arrival houre/Back"+"</th>"+
+                                "<th>"+"Price"+"</th>"+
+                                "<th>"+"Action";
+                            $.each(data,function(key,val){
+                                var id=val.idvoyage;
+                                var path = '{{ path("voyage_update", {'id': 'xxx'}) }}'
+                                path = path.replace("xxx", id);
+
+                                output+=
+                                    "<a href=''>" +
+                                    "<tr >"+
+                                        "<td style='color: darkorange'>"+val.num+
+                                        "<td>"+val.destinationvoyage+ "</td>"+
+                                        "<td>"+val.departvoyage+"</td>"+
+                                        "<td>"+val.compagnie+"</td>"+
+                                        "<td>"+val.+datevoyagealler+"</td>"+
+                                        "<td>"+val.hdepartvoyagealler+ "</td>"+
+                                        "<td>"+val.harriveevoyagealler+"</td>"+
+                                        "<td>"+val.datevoyageretour+"</td>"+
+                                        "<td>"+val.hdepartvoyageretour+"</td>"+
+                                        "<td>"+val.harriveevoyageretour+"</td>"+
+                                        "<td >"+val.prix+"</td>"+
+                                        "<td><a href='" + path + "'> update </a></td>"+
+                                    "</tr> visit </a>";
+
+
+
+
+
+
+
+
+
+
+
+                            });
+                            output+="<ul>";
+                            $("#result").html(output);
+
+                        }
+                        else{
+                            $('#result').html("");
+                        }
+                    }
+
+                });});});
+
+
+    </script>
+
+{% endblock %}
+
+

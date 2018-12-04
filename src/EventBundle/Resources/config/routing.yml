@@ -1,0 +1,48 @@
+event_homepage:
+    path:     /
+    defaults: { _controller: EventBundle:Default:index }
+
+create_event:
+    path:     /createEvent
+    defaults: { _controller: EventBundle:Event:createEvent }
+
+read_event:
+    path:     /readEvent
+    defaults: { _controller: EventBundle:Event:readEvent }
+
+update_event:
+    path:     /updateEvent/{idEvent}
+    defaults: { _controller: EventBundle:Event:updateEvent }
+
+delete_event:
+    path:     /deleteEvent/{idEvent}
+    defaults: { _controller: EventBundle:Event:deleteEvent }
+
+search_ajax:
+    path:     /searchAjax
+    defaults: { _controller: EventBundle:Event:searchAjax }
+
+list_event:
+    path:     /listEvent
+    defaults: { _controller: EventBundle:Event:listEvent }
+
+get_event:
+    path:     /getEvent/{idEvent}
+    defaults: { _controller: EventBundle:Event:getEvent }
+
+participate_event:
+     path:     /participateEvent/{idEvent}
+     defaults: { _controller: EventBundle:Event:participateEvent }
+
+admin_list:
+    path:     /readEventadmin
+    defaults: { _controller: EventBundle:Event:readEventAdmin }
+
+saved_event:
+    path:     /savedEvent
+    defaults: { _controller: EventBundle:Event:savedEvent }
+
+cancel_reservation_event:
+    path:   /cancel/{idevent}
+    defaults: { _controller: EventBundle:Event:cancel }
+

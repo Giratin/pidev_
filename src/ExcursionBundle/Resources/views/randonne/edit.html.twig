@@ -1,5 +1,112 @@
 {% extends 'adminPanel.html.twig' %}
 
+
+{% block Title %}
+    Excursion
+{% endblock %}
+
+{% block stats %}
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-tasks fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">
+                            {% for n in newcount %}
+                                {{ n.nm }}
+                            {% endfor %}
+                        </div>
+                        <div>Active Excursions</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('randonne_active_admin') }}">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-history fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">
+                            {% for n in oldcount %}
+                                {{ n.nm }}
+                            {% endfor %}
+                        </div>
+                        <div>Excursion's archieve</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('randonne_old_admin') }}">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-red">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-support fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">
+                            {% for n in sumcount %}
+                                {{ n.nm }}
+                            {% endfor %}
+                        </div>
+                        <div>All excursions</div>
+                    </div>
+                </div>
+            </div>
+            <a href="">
+                <div class="panel-footer">
+                    <br>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-plus-square fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"><i class="fa fa-info"></i></div>
+                        <div>Add new</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('randonne_new') }}">
+                <div class="panel-footer">
+                    <span class="pull-left">Add new</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+{% endblock %}
+
 {% block body %}
 
     <div class="row">
@@ -40,16 +147,6 @@
             <h4 class="control-label">Program <span style="color: red;"> *</span> </h4>
             {{ form_widget(form.programme, {'type': 'textarea', 'attr' : {'class' : 'form-control', 'placeholder' : 'Program'}}) }}
             <!--textarea class="form-control" placeholder="Program" style="margin-bottom: 20px"></textarea-->
-
-            <h4 class="control-label">Image 1 <span style="color: red;"> *</span> </h4>
-            {{ form_widget(form.imgurl1) }}
-
-            <h4 class="control-label">Image 2 <span style="color: red;"> *</span> </h4>
-            {{ form_widget(form.imgurl2) }}
-
-            <h4 class="control-label">Image 3 <span style="color: red;"> *</span> </h4>
-            {{ form_widget(form.imgurl3) }}
-
 
             <div class="clearfix" style="margin-bottom: 20px" ></div>
             <input type="submit" id="new_excursion" class="btn btn-block" style="background-color: palevioletred; color: white; font-weight: 600; display:block; margin: auto" value="Edit" />

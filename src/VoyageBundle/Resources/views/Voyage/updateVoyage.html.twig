@@ -1,0 +1,228 @@
+{% extends "base.html.twig" %}
+{% block stylesheets %}
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="{{ asset("css/style-voya.css") }}" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Barlow:300,400,500" rel="stylesheet">
+{% endblock %}
+{% block body %}
+
+    {{ form_start(f) }}
+    <h1 class="header-w3ls">
+        Update Journey
+    </h1>
+    <!-- multistep form -->
+    <div class="main-bothside">
+
+        <div class="form-group">
+            <div class="form-mid-w3ls">
+                {{ form_widget(f.destinationvoyage, {'type' : 'text', 'attr' : {'class' : 'form-control', 'placeholder' : 'Destination...'}}) }}
+                <span id="des_error" style="display: none; color: red; position: absolute; margin-left: 200px; margin-top: -45px"><i class="fa fa-exclamation-triangle"></i></span>
+                <span id="des_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 200px; margin-top: -45px"><i class="fa fa-check-circle"></i></span>
+            </div>
+            <div class="form-mid-w3ls">
+                {{ form_widget(f.departvoyage, {'type' : 'text', 'attr' : {'class' : 'form-control', 'placeholder' : 'Departure...'}}) }}
+                <span id="dep_error" style="display: none; color: red; position: absolute; margin-left: 200px; margin-top: -45px"><i class="fa fa-exclamation-triangle"></i></span>
+                <span id="dep_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 200px; margin-top: -45px"><i class="fa fa-check-circle"></i></span>
+
+            </div>
+            <div class="form-mid-w3ls">
+                {{ form_widget(f.num, {'type' : 'text', 'attr' : {'class' : 'form-control', 'placeholder' : "Flight's number..."}}) }}
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="form-group">
+            <div class="form-mid-w3ls">
+                <h4 style="font-size: 18px ">Departure date :<span style="color: red; "> *</span></h4>
+                {{ form_widget(f.datevoyagealler, {'type' : 'Date', 'attr' : {'class' : 'form-control', 'placeholder' : 'Departure date ...'}}) }}
+                <span id="date_error" style="display: none; color: red; position: absolute; margin-left: 200px; margin-top: -45px"><i class="fa fa-exclamation-triangle"></i></span>
+                <span id="date_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 200px; margin-top: -45px"><i class="fa fa-check-circle"></i></span>
+
+            </div>
+            <div class="form-mid-w3ls">
+                <h4 style="font-size: 18px">Departure houre/Go :<span style="color: red; "> *</span></h4>
+                {{ form_widget(f.hdepartvoyagealler, {'type' : 'time', 'attr' : {'class' : 'form-control', 'placeholder' : ''}}) }}
+            </div>
+            <div class="form-mid-w3ls">
+                <h4 style="font-size: 18px ">Arrival houre/Go :<span style="color: red; "> *</span></h4>
+                {{ form_widget(f.harriveevoyagealler,  {'type' : 'time', 'attr' : {'class' : 'form-control'}}) }}
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="form-group">
+            <div class="form-mid-w3ls">
+                <h4 style="font-size: 18px ">Arrival date :<span style="color: red; "> *</span></h4>
+
+                {{ form_widget(f.datevoyageretour, {'type' : 'Date', 'attr' : {'class' : 'form-control', 'placeholder' : 'Departure date ...'}}) }}
+            </div>
+            <div class="form-mid-w3ls">
+
+                <h4 style="font-size: 18px ">Departure houre/Back :<span style="color: red; "> *</span></h4>
+                {{ form_widget(f.hdepartvoyageretour, {'type' : 'time', 'attr' : {'class' : 'form-control', 'placeholder' : ''}}) }}
+            </div>
+            <div class="form-mid-w3ls">
+                <h4 style="font-size: 18px ">Arrival houre/Back :<span style="color: red; "> *</span></h4>
+                {{ form_widget(f.harriveevoyageretour,  {'type' : 'time', 'attr' : {'class' : 'form-control'}}) }}
+            </div>
+        </div>
+        <br>
+        <br>
+
+
+        <div class="form-group">
+            <div class="form-mid-w3ls">
+                <h4>Disponibility :<span style="color: red; "> *</span></h4>
+                {{ form_widget(f.nbPlaceDispo, {'type' : 'number', 'attr' : {'class' : 'form-control'}}) }}
+                <span id="dispo_error" style="display: none; color: red; position: absolute; margin-left: 200px; margin-top: -30px"><i class="fa fa-exclamation-triangle"></i></span>
+                <span id="dispo_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 200px; margin-top: -30px"><i class="fa fa-check-circle"></i></span>
+
+
+            </div>
+            <div class="form-mid-w3ls">
+                <h4>Disponibility :<span style="color: red; "> *</span></h4>
+                {{ form_widget(f.compagnie, {'type' : 'text', 'attr' : {'class' : 'form-control','placeholder' :"Flight's company"}}) }}
+            </div>
+            <div class="form-mid-w3ls">
+                <h4>Price :<span style="color: red; "> *</span></h4>
+                {{ form_widget(f.prix, {'type' : 'number', 'attr' : {'class' : 'form-control'}}) }}
+                <span id="pri_error" style="display: none; color: red; position: absolute; margin-left: 200px; margin-top: -30px"><i class="fa fa-exclamation-triangle"></i></span>
+                <span id="pri_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 200px; margin-top: -30px"><i class="fa fa-check-circle"></i></span>
+
+            </div>
+        </div>
+        <br>
+        <br>
+
+
+
+        <input type="submit" id="btn" value="Update">
+        {{ form_end(f) }}
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- js -->
+    <script type="text/javascript" src="{{ asset('js/jquery-2.2.3.min.js') }}">
+    </script>
+    <script  type="text/javascript" >
+
+        $('#voyagebundle_voyage_destinationvoyage').keyup(function () {
+            var dest= $('#voyagebundle_voyage_destinationvoyage').val();
+            if((dest[0]!=dest[0].toUpperCase()) ||(!isNaN(dest))){
+                $('#des_error').css("display",'block');
+                $('#des_succ').css("display",'none');
+            }
+            else{
+                $('#des_error').css("display",'none');
+                $('#des_succ').css("display",'block');
+            }
+
+        });
+        $('#voyagebundle_voyage_departvoyage').keyup(function () {
+            var dep= $('#voyagebundle_voyage_departvoyage').val();
+            if((dep[0]!=dep[0].toUpperCase()) ||(!isNaN(dep))){
+                $('#dep_error').css("display",'block');
+                $('#dep_succ').css("display",'none');
+            }
+            else{
+                $('#dep_error').css("display",'none');
+                $('#dep_succ').css("display",'block');
+            }
+        });
+        $('#voyagebundle_voyage_nbPlaceDispo').blur(function() {
+            var nb= $('#voyagebundle_voyage_nbPlaceDispo').val();
+            if((nb<5) ||(nb>500)){
+                $('#dispo_error').css("display",'block');
+                $('#dispo_succ').css("display",'none');
+            }
+            else{
+                $('#dispo_error').css("display",'none');
+                $('#dispo_succ').css("display",'block');
+            }
+        });
+        $('#').blur(function() {
+            var nb= $('#voyagebundle_voyage_prix').val();
+            if((nb<5) ||(nb>500)){
+                $('#pri_error').css("display",'block');
+                $('#pri_succ').css("display",'none');
+            }
+            else{
+                $('#pri_error').css("display",'none');
+                $('#pri_succ').css("display",'block');
+            }
+        });
+        function parseDate(input) {
+            var parts = input.match(/(\d+)/g);
+            return new Date(parts[0], parts[1]-1, parts[2]);
+        }
+
+        function days_between(date1) {
+
+            // The number of milliseconds in one day
+            var ONE_DAY = 1000 * 60 * 60 * 24;
+
+            // Convert both dates to milliseconds
+            var d1 = parseDate(date1);
+            var today =  new Date();
+            console.log( "ddd" + today.getTime());
+            var date1_ms = d1.getTime();
+            var date2_ms = today.getTime();
+
+            // Calculate the difference in milliseconds
+            var difference_ms = Math.abs(date1_ms - date2_ms);
+
+            // Convert back to days and return
+            console.log("day: " + Math.round(difference_ms/ONE_DAY));
+            return Math.round(difference_ms/ONE_DAY);
+        }
+
+        $('#voyagebundle_voyage_datevoyagealler').blur(function () {
+            var today = new Date();
+            var day = $('#voyagebundle_voyage_datevoyagealler').val();
+
+            if(Date.parse(day) - Date.parse(today) < 0)
+            {
+                //Date in past
+                console.log("gduima");
+                $('#date_error').css("display","block");
+                $('#voyagebundle_voyage_datevoyagealler').css("border","1px red solid");
+                $('#date_succ').css("display","none");
+            }
+            else{
+                console.log("jdida");
+                //Date in future
+                console.log("it left  " + days_between(day) );
+                $('#date_error').css("display","none");
+                $('#excursionbundle_randonne_daterando').css("border","1px green solid");
+                $('#date_succ').css("display","block");
+            }});
+        $("#btn").click(function (e) {
+            if(($("#dep_error").css("display") == "block")||($("#des_error").css("display") == "block")
+                || ($("#date_error").css("display") == "block")||($("#pri_error").css("display") == "block")
+                ||($("#dipo_error").css("display") == "block"))
+            {
+                swal({
+                    title: "Wrong!",
+                    text: "Please verify entries",
+                    icon: "error",
+                    button: "Ok",
+                });
+                e.preventDefault();
+            }
+            else if (($("#dep_error").css("display") == "none")&&($("#des_error").css("display") == "none")
+                &&($("#date_error").css("display") == "none")&&($("#pri_error").css("display") == "none")
+                &&($("#dispo_error").css("display") == "none")){
+                swal({
+                    title: "Success!",
+                    text: "PYou've successfully updated Journey",
+                    icon: "success",
+                    button: "Ok",
+                });
+            }
+        });
+
+    </script>
+{% endblock %}

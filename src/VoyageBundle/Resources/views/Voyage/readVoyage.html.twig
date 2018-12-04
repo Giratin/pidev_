@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <center>
+    <h2>
+        Journeys
+    </h2>
+
+    <table border="2">
+        <tr>
+            <!-- On rows -->
+
+            <td class="table-secondary">destinationVol</td>
+            <td class="table-secondary">departVol</td>
+            <td class="table-danger">dateVolAller</td>
+            <td class="table-warning">dateVolRetour</td>
+            <td class="table-danger">hdepartVolAller</td>
+            <td class="table-danger">harriveeVolAller</td>
+            <td class="table-warning"> hdepartVolRetour</td>
+            <td class="table-danger"> hdepartVolAller</td>
+            <td class="table-success">nbPlaceDispo</td>
+            <td class="table-light">compagnie</td>
+            <td class="table-primary">prix</td>
+            <td class="table-light">num</td>
+            <td class="table-primary">Action</td>
+            <td class="table-primary">Action</td>
+
+        </tr>
+        <!-- On cells (`td` or `th`) -->
+        {% for v in list %}
+            <tr>
+
+                <td class="table-secondary">{{ v.destinationVoyage }}</td>
+                <td class="table-secondary">{{ v.departVoyage }}</td>
+                <td class="table-danger"> {{ v.dateVoyageAller|date }}</td>
+                <td class="table-warning">{{ v.dateVoyageRetour|date }}</td>
+                <td class="table-danger">{{ v.hdepartVoyageAller|date }}</td>
+                <td class="table-danger">{{ v.harriveeVoyageAller|date }}</td>
+                <td class="table-warning"> {{ v.hdepartVoyageRetour|date }}</td>
+                <td class="table-danger">{{ v.harriveeVoyageRetour|date }}</td>
+                <td class="table-success">{{ v.nbPlaceDispo }}</td>
+                <td class="table-light">{{ v.compagnie }}</td>
+                <td class="table-primary">{{v.prix  }}</td>
+                <td class="table-light">     {{ v.num }}</td>
+                <td class="table-primary"><a href="{{ path('voyage_delete',{"id":v.idVoyage}) }}">Supprimer</a></td>
+                <td class="table-primary"><a href='{{ path('voyage_update',{'id':v.idVoyage}) }}'>modifier</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+        <div class="navigation" style="margin-left:200px" >
+            {{ knp_pagination_render(list) }}
+        </div>
+    </center>
+{% endblock %}

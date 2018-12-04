@@ -1,0 +1,156 @@
+{% extends 'adminPanel.html.twig' %}
+
+{% block stylesheet %}
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=PT+Serif|Titillium+Web|Warnes" rel="stylesheet">
+
+{% endblock %}
+
+{% block Title %}
+    <i class="fa fa-users"></i> Users
+{% endblock %}
+
+{% block stats %}
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-tasks fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">
+                            {% for i in count %}
+                                {{ i.nm }}
+                            {% endfor %}
+
+                        </div>
+                        <div>All Users</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('users_page') }}">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-shopping-cart fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">
+                            {% for i in enabled %}
+                                {{ i.nm }}
+                            {% endfor %}
+                        </div>
+                        <div>Enabled Users</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('list_enable') }}">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-ban fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">
+                                {% for i in blocked %}
+                                    {{ i.nm }}
+                                {% endfor %}
+                            </div>
+                            <div>Blocked user</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="{{ path('list_block') }}">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+
+{% endblock %}
+{% block body %}
+
+
+
+
+
+    <div style="margin-left: 40%; margin-top: 20px">
+
+
+    </div>
+
+    <div class="well">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th><i class="fa fa-user-md"></i> Name</th>
+                <th><i class="fa fa-user-md"></i> Last name</th>
+                <th><i class="fa fa-user"></i> Username</th>
+                <th><i class="fa fa-clock-o"></i> Last Login</th>
+                <th style="width: 36px;"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for u in users %}
+            <tr>
+                <td>{{ u.id }}</td>
+                <td>{{ u.prenom }}</td>
+                <td>{{ u.nom }}</td>
+                <td>{{ u.username }}</td>
+                <td>{{ u.lastlogin|date }}</td>
+
+                <td>
+                    <a href="user.html"><i class="icon-pencil"></i></a>
+                    <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="pagination" style="margin-left: 400px">
+        {{ knp_pagination_render(users) }}
+    </div>
+    <div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Delete Confirmation</h3>
+        </div>
+        <div class="modal-body">
+            <p class="error-text">Are you sure you want to delete the user?</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+            <button class="btn btn-danger" data-dismiss="modal">Delete</button>
+        </div>
+    </div>
+
+{% endblock %}
+

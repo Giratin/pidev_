@@ -1,3 +1,22 @@
 admin_homepage:
     path:     /
     defaults: { _controller: AdminBundle:Default:index }
+users_page:
+    path:     /users
+    defaults: { _controller: AdminBundle:Default:users }
+
+block_user:
+    path: /block/{id}
+    defaults: { _controller: AdminBundle:Default:block }
+
+unblock_user:
+    path: /unblock/{id}
+    defaults: { _controller: AdminBundle:Default:unblock }
+
+list_block:
+    path: /blacklist
+    defaults: { _controller: AdminBundle:Default:blocked }
+
+list_enable:
+    path: /whitelist
+    defaults: { _controller: AdminBundle:Default:enable }

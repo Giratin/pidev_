@@ -17,7 +17,7 @@ class ReservationrandonneRepository extends \Doctrine\ORM\EntityRepository
             ->getEntityManager()
             ->createQuery('SELECT R FROM ExcursionBundle:Reservationrandonne R WHERE R.idRandonne = :idr AND R.idClient = :idc');
         $dql->setParameter(':idr',$idRando)
-            ->setParameter(':idc', $idUser);
+        ->setParameter(':idc', $idUser);
         return $dql->getResult();
     }
 }

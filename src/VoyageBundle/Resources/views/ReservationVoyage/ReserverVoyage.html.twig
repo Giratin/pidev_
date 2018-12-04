@@ -1,0 +1,61 @@
+{% extends "base.html.twig" %}
+{% block stylesheets %}
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="{{ asset("css/style-voya.css") }}" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Barlow:300,400,500" rel="stylesheet">
+{% endblock %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6" style="margin-top: 50px;padding: 70px 50px">
+            <fieldset style="width: 100%;background-color: #9fcdff;padding: 50px 50px">
+
+
+        {{ form_start(f) }}
+        <h1 class="header-w3ls">
+            Booking
+        </h1>
+
+                <br>
+        <div class="form-mid-w3ls">
+            <h4 style="font-size: 18px">Flight's number :<span style="color: red; "> *</span></h4>
+            {{ form_widget(f.voyage, { 'attr' : {'class' : 'form-control input-lg', 'placeholder' : "Choose your flight's number..."}}) }}
+        </div>
+                <br>
+
+                <div class="form-mid-w3ls">
+            {{ form_widget(f.nom, {'type' : 'text', 'attr' : {'class' : 'form-control input-lg', 'placeholder' : 'your last name...'}}) }}
+        </div>
+                <br>
+                <div class="form-mid-w3ls">
+            {{ form_widget(f.prenom, {'type' : 'text', 'attr' : {'class' : 'form-control input-lg', 'placeholder' : 'your first...'}}) }}
+        </div>
+                <br>
+                <div class="form-mid-w3ls">
+                    {{ form_widget(f.mail, {'type' : 'email', 'attr' : {'class' : 'form-control input-lg', 'placeholder' : 'your email ...'}}) }}
+                </div>
+                <br>
+                <div class="form-mid-w3ls">
+                    <h4 style="font-size: 18px">Number of place :<span style="color: red; "> *</span></h4>
+                    {{ form_widget(f.nbrePlaceReserv, {'type' : 'number', 'attr' : {'class' : 'form-control input-lg', 'placeholder' : 'enter a number ...'}}) }}
+        </div> <br>
+                <div class="form-mid-w3ls">
+
+                    {{ form_widget(f.prix, {'type' : 'text', 'attr' : {'class' : 'form-control ', 'placeholder' : ''}}) }}
+        </div>
+<br>
+
+
+        <input type="submit" style="background-color: #0c5460" value="Book">
+        {{ form_end(f) }}
+            </fieldset>
+            </div>
+
+            <div class="col-md-3"></div>
+    </div>
+
+{% endblock %}
+
+

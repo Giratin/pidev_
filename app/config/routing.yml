@@ -17,4 +17,12 @@ app:
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
+voyage:
+    resource: "@VoyageBundle/Resources/config/routing.yml"
+    prefix:   /voyage
+
+event:
+    resource: "@EventBundle/Resources/config/routing.yml"
+    prefix:   /event
+
 

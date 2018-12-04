@@ -52,7 +52,7 @@
 
                     <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item {% block active %}active{% endblock %}">
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ path('homepage') }}">Home <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
@@ -63,6 +63,11 @@
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu agile_short_dropdown" style="background-color: #ccc;">
+                                    {% block adminPanel %}
+                                        <li>
+                                            <p><i class="fa fa-user-secret"></i> <a href="{{ path('admin_homepage') }}">Admin Panel</a></p>
+                                        </li>
+                                    {% endblock %}
                                     <li>
                                         <p><i class="fa fa-hotel"></i> Hotels</p>
                                         &emsp; <a href="">Pricing Plans</a>
@@ -73,18 +78,20 @@
                                     </li>
                                     <li>
                                         <p><i class="fa fa-calendar"></i> Events</p>
-                                        &emsp;<a href="">View Available</a>
-                                        &emsp; <a href="">Archieve</a>
+                                        &emsp;<a href="{{ path("list_event") }}">View Available</a>
+                                        &emsp;<a href="{{ path("saved_event") }}">My Events</a>
+                                        {% block adminC %}&emsp;<a href="{{ path("create_event") }}">Add New</a>&emsp;{% endblock%}
+
                                     </li>
                                     <li>
                                         <p><i class="fa fa-hiking"></i>Excursions</p>
                                         &emsp;<a href="{{ path('randonne_index') }}">View Available</a>
-                                        &emsp;<a href="{{ path('randonne_old') }}">Archieve</a>
+                                        &emsp;<a href="{{ path('randonne_old') }}">Archieve</a> <br>
+                                        &emsp;<a href="{{ path('user_randonne') }}">My excursions</a>
                                     </li>
                                     <li>
                                         <p>Activity</p>
                                         &emsp;<a href="">View Available</a>
-                                        &emsp;<a href="">Archieve</a>
                                     </li>
                                 </ul>
                             </li>
@@ -200,49 +207,6 @@
         <!--//Slider-->
 
 
-        <!-- booking form -->
-        <section class="booking py-5" id="booking">
-            <h3 class="text-center mb-4">Search Your Tour</h3>
-            <div class="container">
-                <div class="book-form">
-                    <form action="#" method="post">
-                        <div class="row">
-                            <div class="col-md-3 col-sm-6 col-6 px-2 form-time-w3layouts editContent">
-                                <label class="editContent"><span class="fa fa-user" aria-hidden="true"></span> Traveller Name</label>
-                                <input type="text" placeholder="Your Full Name" required="">
-                            </div>
-                            <div class="col-md-3 col-sm-6 col-6 px-2 form-date-w3-agileits editContent">
-                                <label class="editContent"><span class="fa fa-map-marker" aria-hidden="true"></span> Tour place</label>
-                                <select class="form-control">
-                                    <option>Destination</option>
-                                    <option>London</option>
-                                    <option>Paris</option>
-                                    <option>India</option>
-                                    <option>Japan</option>
-                                    <option>America</option>
-                                </select>
-                            </div>
-                            <div class="col-md-2 col-sm-4 col-6 px-2 form-left-agileits-w3layouts editContent">
-                                <label class="editContent"><span class="fa fa-bus" aria-hidden="true"></span> Trip in</label>
-                                <div class="agileits_w3layouts_main_gridl">
-                                    <input class="date has Datepicker" id="datepicker" name="Text" type="text" value="Start Date" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Select Date';}" required="">
-                                </div>
-                            </div>
-                            <div class="col-md-2 col-sm-4 col-6 px-2 form-left-agileits-w3layouts editContent">
-                                <label class="editContent"><span class="fa fa-bus" aria-hidden="true"></span> Trip out</label>
-                                <div class="agileits_w3layouts_main_gridl">
-                                    <input class="date has Datepicker" id="datepicker1" name="Text" type="text" value="Return Date" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Select Date';}" required="">
-                                </div>
-                            </div>
-                            <div class="col-md-2 px-2 col-sm-4 col-6 form-left-agileits-submit editContent">
-                                <input type="submit" value="Search">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </section>
-        <!-- //booking form -->
 
 
         <!-- welcome -->
@@ -251,10 +215,9 @@
                 <h3 class="heading text-center mb-md-5 mb-4"> About Us </h3>
                 <div class="row welcome-grids">
                     <div class="col-lg-6">
-                        <h4 class="mb-3">welcome to the travel world</h4>
+                        <h4 class="mb-3">welcome to HolidaysNox</h4>
                         <h3>Remember that happiness is a way of travel, not a destination.</h3>
                         <p class="my-4">Aliquam consequat rhoncus ipsum et hendrerit. Proin sed nibhila rin iaculis, aliquet nunc nec, ornare nulla. Duis maximus faucibus ipsum consectetur. Donec elementum hendrerit arcu id rhoncus initis. lot Suspendisse ut elementum nunc. Aenean aliquam porta sem ins tincidunt congue. Phasellus dictum viverra sem id vehicula. Fus cenec elementum sapien.</p>
-                        <a href="#">Read More</a>
                     </div>
                     <div class="col-lg-6 mt-lg-0 mt-5 welcome-grid3">
                         <div class="position">
@@ -415,9 +378,9 @@
             </div>
         </section>
 
-        <script type="text/javascript" href="{{ asset('') }}"></script>
-        {% block javascripts %}{% endblock %}
         <script type="text/javascript" src="{{ asset('js/jquery-2.2.3.min.js') }}"></script>
+        {% block javascripts %}{% endblock %}
+
         <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script> <!-- Necessary-JavaScript-File-For-Bootstrap -->
 
         <script src="{{ asset('js/jquery.desoslide.js') }}"></script>
