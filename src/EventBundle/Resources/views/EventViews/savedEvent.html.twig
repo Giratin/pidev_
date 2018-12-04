@@ -22,7 +22,7 @@
 
 
                     body {
-                        background: url('{{ asset('images/autumn-219972_640.jpg') }}');
+                        background: url('{{ asset('images/796238-events-lights.jpg') }}');
                         font-family: 'Titillium Web', sans-serif;
                         background-repeat: no-repeat;
                         background-size: 1730px 763px;
@@ -33,8 +33,18 @@
                         color: #1ab188;
                         transition: .5s ease;
                     }
+                    .table .thead-light th {
+                        color: #495057;
+                        background-color: #e9ecef00;
+                        border-color: #dee2e6;
+                    }
+                    .btn-danger{
+                        color: #fff;
+                        background-color: sienna;
+                        border-color: transparent;
+                    }
                     .form {
-                        background: #ccc;
+                        background: #ffc48dc2;
                         padding: 40px;
                         max-width: 600px;
                         margin: 40px auto;
@@ -183,7 +193,7 @@
                     }
 
                 </style>
-                <h1 style="margin-bottom: 20px; text-align: center; color: #c76c1a; font-size: 50px; font-family: Courgette; font-weight: 600; text-shadow: 1px 4px 10px #000;">
+                <h1 style="margin-bottom: 20px; text-align: center; color: #fbd55c; font-size: 50px; font-family: cursive; font-weight: 600; text-shadow: 1px 4px 10px #ff8100;">
                     My Events
                 </h1>
                 <div class="form">
@@ -202,7 +212,7 @@
                                         <th scope="col">Event</th>
                                         <th scope="col"><i class="fa fa-calendar"></i> Date</th>
                                         <th scope="col"><a class="fa fa-dollar"></a> Price</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -231,7 +241,7 @@
                                                     <h4 style="color: red;">Are you sure you want to forget this event?</h4>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <a class="btn btn-danger" href="{{ path('cancel_reservation', {'idevent':i.idevent}) }}"> Confirm </a>
+                                                    <a class="btn btn-danger" href="{{ path('cancel_event', {'idevent':i.idevent}) }}"> Confirm </a>
                                                     <button type="button" class="btn btn-default" data-dismiss="modal"> Cancel </button>
                                                 </div>
                                             </div>

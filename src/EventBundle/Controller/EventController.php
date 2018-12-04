@@ -48,15 +48,18 @@ class EventController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         //$dql = "SELECT bp FROM EventBundle:Event bp";
-        $queryBuilder = $em->getRepository('EventBundle:Event')->createQueryBuilder('bp');
-
+        $listEvent = $em->getRepository('EventBundle:Event')->createQueryBuilder('bp')
+            ->where('bp.dateevent > :today')
+            ->setParameter("today", new \DateTime());
+        $count = $this->getDoctrine()->getRepository(Event::class)->countNewEvent();
         //$event=$em->getRepository(Event::class)->findAll();
         if($request->query->getAlnum('filter')){
-            $queryBuilder
-                ->where('bp.nomevent LIKE :nomevent')
+            $listEvent = $em->getRepository('EventBundle:Event')->createQueryBuilder('bp')
+                ->where('bp.nomevent LIKE :nomevent AND bp.dateevent > :today')
+                ->setParameter("today", new \DateTime())
                 ->setParameter('nomevent','%'.$request->query->getAlnum('filter').'%');
         }
-        $query=$queryBuilder->getQuery();
+        $query=$listEvent;
         /**
          * @var $paginator \Knp\Component\Pager\Paginator
          */
@@ -68,6 +71,7 @@ class EventController extends Controller
         );
         return $this->render('@Event/EventViews/listEvent.html.twig', array(
             'events'=>$result,
+            'count'=>$count,
         ));
     }
 
@@ -159,7 +163,7 @@ class EventController extends Controller
                 $event=$em->getRepository(Event::class)->findOneByIdevent($idEvent);
                 $em->remove($event);
                 $em->flush();
-                return $this->redirectToRoute('read_event');
+                return $this->redirectToRoute('admin_list');
             }
             else
             {
@@ -176,14 +180,14 @@ class EventController extends Controller
     public function searchAjaxAction(Request $request){
         if($request->isXmlHttpRequest()){
             $name=$request->get('nomEvent');
-            $event=$this->getDoctrine()->getRepository(Event::class)->find($name);
+            $event=$this->getDoctrine()->getRepository(Event::class)->mefind($name);
             //initialisation of serializer
             $se=new Serializer(array(new ObjectNormalizer()));
             //normalizer les listes
             $data=$se->normalize($event);
             return new JsonResponse($data);
         }
-        return $this->render('@Event/EventViews/searchAjax.html.twig');
+        return $this->render('@Event/EventViews/listAdmin.html.twig');
     }
 
 
@@ -303,15 +307,18 @@ class EventController extends Controller
                 $em = $this->getDoctrine()->getManager();
 
                 //$dql = "SELECT bp FROM EventBundle:Event bp";
-                $queryBuilder = $em->getRepository('EventBundle:Event')->createQueryBuilder('bp');
-
+                //$queryBuilder = $em->getRepository('EventBundle:Event')->createQueryBuilder('bp');
+                $listEvent = $em->getRepository('EventBundle:Event')->createQueryBuilder('bp')
+                    ->where('bp.dateevent > :today')
+                    ->setParameter("today", new \DateTime());
+                $count = $this->getDoctrine()->getRepository(Event::class)->countNewEvent();
                 //$event=$em->getRepository(Event::class)->findAll();
                 if($request->query->getAlnum('filter')){
-                    $queryBuilder
-                        ->where('bp.nomevent LIKE :nomevent')
+                    $listEvent  = $this->getDoctrine()->getManager()->createQuery("SELECT R FROM EventBundle:Event R WHERE R.dateevent > :today AND R.nomevent LIKE :nomevent")
+                        ->setParameter("today", new \DateTime())
                         ->setParameter('nomevent','%'.$request->query->getAlnum('filter').'%');
                 }
-                $query=$queryBuilder->getQuery();
+                $query=$listEvent;
                 /**
                  * @var $paginator \Knp\Component\Pager\Paginator
                  */
@@ -323,6 +330,7 @@ class EventController extends Controller
                 );
                 return $this->render('@Event/EventViews/listAdmin.html.twig', array(
                     'events'=>$result,
+                    'count'=>$count,
                 ));
             }
             else
@@ -352,11 +360,11 @@ class EventController extends Controller
     {
         $user = $this->getUser();
 
-        $listRando = $this->getDoctrine()->getRepository(Event::class)->myFindByNewDate();
+        $listEvent = $this->getDoctrine()->getRepository(Event::class)->myFindByNewDate();
         $count = $this->getDoctrine()->getRepository(Event::class)->countNewEvent();
 
         $event = $this->get('knp_paginator')->paginate(
-            $listRando,
+            $listEvent,
             $request->query->get('page',1),10
         );
 
