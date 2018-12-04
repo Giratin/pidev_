@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new VoyageBundle\VoyageBundle(),
             new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
             new EventBundle\EventBundle(),
+            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

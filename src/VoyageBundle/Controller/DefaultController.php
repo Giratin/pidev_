@@ -8,6 +8,6 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('@Voyage/Default/index.html.twig');
+        return $this->render('@Voyage/Voyage/searchAjaxVoyage.html.twig');
     }
 }

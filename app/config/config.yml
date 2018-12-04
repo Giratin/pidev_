@@ -98,3 +98,14 @@ knp_paginator:
 
 vich_uploader:
     db_driver: orm
+
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\""
+        options:    []
+    image:
+        enabled:    true
+        binary:     /usr/local/bin/wkhtmltoimage #"\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltoimage.exe\"" #for Windows users
+        options:    []
+    temporary_folder: "%kernel.cache_dir%/snappy"

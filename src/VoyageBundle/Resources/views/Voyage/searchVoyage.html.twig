@@ -1,20 +1,365 @@
 {% extends "base.html.twig" %}
-{% block body %}
-    <html>
-    <head>
 
-    </head>
-    <body>
-    <h1>
-        Rechercher Voyage
-    </h1>
-    <form method="get">
-        pays:
-        <input type="text" name="destinationvoyage">
-        <input type="submit" value="Rechercher">
-    </form>
-    </body>
-    </html>
+{% block stylesheets %}
+
+
+    <link href="{{ asset("css/style-voya.css") }}" rel="stylesheet">
 {% endblock %}
 
+{% block body %}
+<style>
+
+    body{
+        background-image: url(http://cdn.wonderfulengineering.com/wp-content/uploads/2014/05/airplane-wallpaper-2.jpg);
+    }
+    @media (max-width: 320px) {
+        .main{
+            width: 100%;
+        }
+    }
+
+    .main{
+        max-width:80%;
+        margin: 0 auto;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        margin-top: 40px;
+        box-shadow: 10px 10px 5px black;
+
+    }
+    .maincontent input {
+        color: #333;
+    }
+
+    @-webkit-keyframes Floatingy{
+        from {-webkit-transform:translate(0, 0px);}
+        65% {-webkit-transform:translate(50px, 0);}
+        to {-webkit-transform: translate(0, -0px);}
+    }
+    @-moz-keyframes Floatingy{
+        from {-moz-transform:translate(0, 0px);}
+        65% {-moz-transform:translate(50px, 0);}
+        to {-moz-transform: translate(0, -0px);}
+    }
+    @-webkit-keyframes Floatingx{
+        from {-webkit-transform:translate(50px, 0px);}
+        65% {-webkit-transform:translate(0, 0);}
+        to {-webkit-transform: translate(50px, -0px);}
+    }
+    @-moz-keyframes Floatingx{
+        from {-moz-transform:translate(50px, 0px);}
+        65% {-moz-transform:translate(0, 0);}
+        to {-moz-transform: translate(50px, -0px);}
+    }
+
+
+    .btn-animation
+    {
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: ease-in-out;
+        -moz-animation-iteration-count: infinite;
+        -moz-animation-timing-function: ease-in-out;
+        -webkit-animation-name: Floatingy;
+        -moz-animation-name: Floatingy;
+        -webkit-animation-duration: 5s;
+        -moz-animation-duration: 5s;
+        border-radius:30px;
+        box-shadow:0 14px 26px -12px rgba(0,0,0,.42),0 4px 23px 0 rgba(0,0,0,.12),0 8px 10px -5px rgba(0,0,0,.2)
+    }
+
+
+    .btn-animation:hover
+    {
+        box-shadow:0 14px 26px -12px rgba(0,0,0,.42),0 4px 23px 0 rgba(0,0,0,.12),0 8px 10px -5px rgba(0,0,0,.2)
+    }
+
+
+    .mt-60
+    {
+        margin-top:60px;
+    }
+</style>
+<form method="get">
+    <div id="wrapper">
+
+    <div class="container main">
+        <br>
+        <h1 style="font-size: 30px"> <i class="fa fa-plane"></i> Search Flights </h1> <br>
+        <br><br><br>
+        <div class="maincontent">
+            <div class="row">
+
+
+                <div class="col-sm-6 col-xm-6 abc">
+                    <h5 style="margin-left: 50px">Flying from </h5>
+                    <input list="browsers1" type="text" id="rech1" name="departvoyage">
+                    <datalist id="browsers1">
+                    </datalist>
+                    <span id="dep_error" style="display: block; color: red; position: absolute; margin-left: 270px; margin-top: -30px">
+                        <i class="fa fa-exclamation-triangle"></i></span>
+                    <span id="dep_succ" style="display:none; color: #1e7e34; position: absolute; margin-left: 270px; margin-top: -30px"><i class="fa fa-check-circle"></i></span>
+                </div>
+
+
+                <div class="col-sm-6 col-xm-6 abc">
+                    <h5 style="margin-left: -70px"> Flying to </h5>
+                    <input list="browsers" type="text" id="rech" name="destinationvoyage">
+                    <datalist id="browsers">
+                    </datalist>
+                    <span id="des_error" style="display: block; color: red; position: absolute; margin-left: 160px; margin-top: -30px">
+                        <i class="fa fa-exclamation-triangle"></i></span>
+                    <span id="des_succ" style="display:none; color: #1e7e34; position: absolute; margin-left: 160px; margin-top: -30px">
+                        <i class="fa fa-check-circle"></i></span>
+
+
+                </div>
+
+            </div><br>
+
+            <div class="row form-group">
+                <div class="col-sm-4 col-xm-6">
+                    <br>
+
+
+                    <h5 style="margin-left: 50px"> Departing</h5>
+                    <i class="fa fa-calendar" style="margin-left: 85px" ></i>
+                    <input id="voyagebundle_voyage_datevoyagealler" type="date" placeholder="mm/dd/yyyy" style="margin-left: 15px" name="datevoyagealler">
+                    <span id="date_error1" style="display: block; color: red; position: absolute; margin-left: 240px; margin-top: -30px">
+                        <i class="fa fa-exclamation-triangle"></i></span>
+                    <span id="date_succ1" style="display:none; color: #1e7e34; position: absolute; margin-left: 240px; margin-top: -30px">
+                        <i class="fa fa-check-circle"></i></span>
+                </div>
+
+                <div class="col-sm-6 col-xm-6">
+                    <br>
+                    <h5 style="margin-left: 110px"> Returning </h5>
+                    <i class="fa fa-calendar" style="margin-left: 150px"></i>
+                    <input style="margin-left: 15px" id="voyagebundle_voyage_datevoyageretour" class="glyphicon glyphicon-calendar" type="date" placeholder="mm/dd/yyyy" name="datevoyageretour">
+                    <span id="date_error2" style="display: block; color: red; position: absolute; margin-left: 305px; margin-top: -30px">
+                        <i class="fa fa-exclamation-triangle"></i></span>
+                    <span id="date_succ2" style="display:none; color: #1e7e34; position: absolute; margin-left: 305px; margin-top: -30px"><i class="fa fa-check-circle"></i></span>
+
+
+                </div>
+
+                <br>
+                <br>
+                <div class="row form-group">
+                <div class="col-sm-6 col-xm-6 abc">
+                    <div class="col-sm-6">
+                        <br>
+                    <h5 style="margin-left: 50px" > Places </h5>
+                    <input type="number" id="voyagebundle_voyage_nb" name="nbPlaceDispo"
+                           min="0" max="100" step="1" value="0" style="margin-left: 115px;" >
+                        <span id="nb_error" style="display: block; color: red; position: absolute; margin-left: 305px; margin-top: -30px">
+                        <i class="fa fa-exclamation-triangle"></i></span>
+                        <span id="nb_succ" style="display:none; color: #1e7e34; position: absolute; margin-left: 305px; margin-top: -30px"><i class="fa fa-check-circle"></i></span>
+
+
+
+
+                        <div class="row">
+                                <div class="col-lg-12">
+                                    <br>
+                                    <input  class="btn btn-primary btn-lg btn-animation" style="color: orangered ;border-color: orangered; width: 130px; background-color: orange" type="submit" value="Search" id="btn">
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                </div>
+         <br>
+
+
+            </div></div>
+
+    </div>
+    </div>
+    </div>
+    </form>
+
+{% endblock %}
+{% block javascripts %}
+<script type="text/javascript" src="{{ asset('js/jquery-2.2.3.min.js') }}">
+</script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script  type="text/javascript" >
+
+
+
+
+
+    function parseDate(input) {
+        var parts = input.match(/(\d+)/g);
+        return new Date(parts[0], parts[1]-1, parts[2]);
+    }
+
+    function days_between(date1) {
+
+        // The number of milliseconds in one day
+        var ONE_DAY = 1000 * 60 * 60 * 24;
+
+        // Convert both dates to milliseconds
+        var d1 = parseDate(date1);
+        var today =  new Date();
+        console.log( "ddd" + today.getTime());
+        var date1_ms = d1.getTime();
+        var date2_ms = today.getTime();
+
+        // Calculate the difference in milliseconds
+        var difference_ms = Math.abs(date1_ms - date2_ms);
+
+        // Convert back to days and return
+        console.log("day: " + Math.round(difference_ms/ONE_DAY));
+        return Math.round(difference_ms/ONE_DAY);
+    }
+
+    $('#voyagebundle_voyage_datevoyagealler').blur(function () {
+        var today = new Date();
+        var day = $('#voyagebundle_voyage_datevoyagealler').val();
+
+        if(Date.parse(day) - Date.parse(today) < 0)
+        {
+
+
+            $('#date_error1').css("display","block");
+            $('#voyagebundle_voyage_datevoyagealler').css("border","1px red solid");
+            $('#date_succ1').css("display","none");
+        }
+        else{
+
+            $('#date_error1').css("display","none");
+            $('#voyagebundle_voyage_datevoyagealler').css("border","1px green solid");
+            $('#date_succ1').css("display","block");
+
+        }});
+        $('#voyagebundle_voyage_datevoyageretour').blur(function () {
+        var today = new Date();
+        var day = $('#voyagebundle_voyage_datevoyageretour').val();
+
+        if(Date.parse(day) - Date.parse(today) < 0)
+        {
+
+
+            $('#date_error2').css("display","block");
+            $('#voyagebundle_voyage_datevoyageretour').css("border","1px red solid");
+            $('#date_succ2').css("display","none");
+        }
+        else{
+
+            $('#date_error2').css("display","none");
+            $('#voyagebundle_voyage_datevoyageretour').css("border","1px green solid");
+            $('#date_succ2').css("display","block");
+
+        }});
+    $('#voyagebundle_voyage_nb').blur(function() {
+        var nb= $('#voyagebundle_voyage_nb').val();
+        if(nb<1){
+            $('#nb_error').css("display",'block');
+            $('#nb_succ').css("display",'none');
+        }
+        else{
+            $('#nb_error').css("display",'none');
+            $('#nb_succ').css("display",'block');
+        }
+    });
+    $("#btn").click(function (e) {
+        if(($("#date_error2").css("display") == "block")||
+            ($("#nb_error").css("display") == "block") ||
+            ($("#date_error1").css("display") == "block")||
+            ($("#dep_error").css("display") == "block")||
+                (($("#des_error").css("display") == "block")))
+
+        {
+
+            console.log('erreur');
+            swal({
+                title: "Wrong!",
+                text: "Please verify entries",
+                icon: "error",
+                button: "Ok",
+            });
+            console.log("cv");
+           // $('#btn').prop("disabled",true);
+
+            e.preventDefault();
+        }
+
+    });
+
+
+    $('#rech').keyup(function(){
+        console.log('cv pas');
+        var search = $('#rech').val();
+        $.ajax({
+            url:"{{ path('voyage_search_ajax') }}",
+            type:'POST',
+            data:{'destination':search},
+
+            success:function(data)
+            {
+
+                if(search!=""){
+                    console.log('cv');
+                    $.each(data,function(key,val) {
+                        var optt = $('<option value="' + val.destinationvoyage + '">');
+
+                        console.log(val.destinationvoyage);
+
+
+                        $('#browsers').append(optt);
+                    });
+
+                    $('#des_succ').css("display","block");
+                    $('#des_error').css("display","none");}
+                else{
+                    document.getElementById("browsers").innerHTML = "";
+                    $('#des_error').css("display","block");
+                    $('#des_succ').css("display","none");
+                }
+
+            }
+        });
+    });$('#rech1').keyup(function(){
+        console.log('cv pas');
+        var search = $('#rech1').val();
+        $.ajax({
+            url:"{{ path('voy_search_ajax') }}",
+            type:'POST',
+            data:{'depart':search},
+
+            success:function(data)
+            {
+
+                if(search!=""){
+                    console.log('cv');
+                    $.each(data,function(key,val) {
+                        var optt = $('<option value="' + val.departvoyage + '">');
+
+                        //console.log(val.departvoyage);
+
+
+                        $('#browsers1').append(optt);
+
+                    });
+
+                    $('#dep_succ').css("display","block");
+                    $('#dep_error').css("display","none");}
+                else{
+                    $('#dep_error').css("display","block");
+                    $('#dep_succ').css("display","none");
+
+                    document.getElementById("browsers1").innerHTML = "";
+                    $('#browsers1').remove();
+                }
+
+
+
+            }
+        });
+    });
+
+    </script>
+{% endblock %}
 
