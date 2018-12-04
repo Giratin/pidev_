@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
-
+{% block adminC %}{% endblock %}
+{% block adminPanel %}{% endblock %}
 {% block body %}
 
     <div class="container">
@@ -21,7 +22,7 @@
 
 
                     body {
-                        background: url("{{ asset('images/autumn-219972_640.jpg') }}");
+                        background: url('{{ asset('images/autumn-219972_640.jpg') }}');
                         font-family: 'Titillium Web', sans-serif;
                         background-repeat: no-repeat;
                         background-size: 1730px 763px;
@@ -33,7 +34,7 @@
                         transition: .5s ease;
                     }
                     .form {
-                        background: rgba(19, 35, 47, 0.9);
+                        background: #ccc;
                         padding: 40px;
                         max-width: 600px;
                         margin: 40px auto;
@@ -57,8 +58,8 @@
                         display: block;
                         text-decoration: none;
                         padding: 15px;
-                        background: rgba(160, 179, 176, 0.25);
-                        color: #a0b3b0;
+                        background: rgba(76, 80, 80, 0.25);
+                        color: #FFFFFF;
                         font-size: 20px;
                         float: left;
                         width: 50%;
@@ -67,11 +68,11 @@
                         transition: .5s ease;
                     }
                     .tab-group li a:hover {
-                        background: #179b77;
+                        background: #c76c1a;
                         color: #ffffff;
                     }
                     .tab-group .active a {
-                        background: #1ab188;
+                        background: #f2994a;
                         color: #ffffff;
                     }
 
@@ -182,7 +183,7 @@
                     }
 
                 </style>
-                <h1 style="margin-bottom: 20px; text-align: center; font-family: Courgette; font-weight: 600; color: #f2994a;">
+                <h1 style="margin-bottom: 20px; text-align: center; color: #c76c1a; font-size: 50px; font-family: Courgette; font-weight: 600; text-shadow: 1px 4px 10px #000;">
                     My excursions
                 </h1>
                 <div class="form">
@@ -194,13 +195,14 @@
 
                     <div class="tab-content">
                         <div id="new">
+                            {% if my %}
                                 <table class="table table-striped" id="new">
                                     <thead>
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Destination</th>
-                                        <th scope="col">Date</th>
-                                        <th scope="col">Price</th>
+                                        <th scope="col"><i class="fa fa-calendar"></i> Date</th>
+                                        <th scope="col"><a class="fa fa-dollar"></a> Price</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                     </thead>
@@ -210,16 +212,42 @@
                                             <th scope="row">{{ i.idrando}}</th>
                                             <td>{{ i.destination}}</td>
                                             <td>{{ i.daterando}}</td>
-                                            <td>{{ i.prixPersonne}}</td>
-                                            <td>{{ i.prixPersonne}}</td>
+                                            <td><a class="fa fa-dollar"></a> {{ i.prixPersonne}}</td>
+                                            <td style="align-content: center"><input class="btn btn-danger" type="button" data-toggle="modal" data-target="#myModal{{ i.idrando }}" value="Cancel"></td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
                                 </table>
+                                {% for i in my %}
+                                    <div id="myModal{{ i.idrando }}" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
 
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Cancel</h4>
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                                                </div>
+                                                <div class="modal-body">
+                                                   <h4 style="color: red;">Are you sure you want to cancel this excursion?</h4>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a class="btn btn-danger" href="{{ path('cancel_reservation', {'idrando':i.idrando}) }}">Confirm</a>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Abort</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <p>You have no excursions</p>
+                            {% endif %}
                         </div>
 
                         <div id="old">
+                            {% if old %}
                             <table class="table table-striped" id="old">
                                 <thead class="thead-light">
                                 <tr>
@@ -230,17 +258,22 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+
                                 {% for i in old %}
                                     <tr>
                                         <th scope="row">{{ i.idrando}}</th>
                                         <td>{{ i.destination}}</td>
                                         <td>{{ i.daterando}}</td>
-                                        <td>{{ i.prixPersonne}}</td>
-                                        <td>{{ i.prixPersonne}}</td>
+                                        <td><a class="fa fa-dollar"></a> {{ i.prixPersonne}}</td>
+                                        <td><a href="{{ path('randonne_show',{'idrando':i.idrando}) }}"></a></td>
                                     </tr>
                                 {% endfor %}
+
                                 </tbody>
                             </table>
+                            {% else %}
+                                <p>You have no excursions</p>
+                            {% endif %}
                         </div>
 
                     </div><!-- tab-content -->
@@ -297,7 +330,6 @@
 
         });
     </script>
-
 
 
 {% endblock %}

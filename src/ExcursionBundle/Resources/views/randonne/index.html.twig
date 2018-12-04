@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-
+{% block adminPanel %}{% endblock %}
 {% block body %}
     <style>
         .btn-product{
@@ -24,9 +24,13 @@
             <div style="border: 1px solid #ccc; border-radius: 5px; margin-top: 30px; padding-bottom: 10px" class="col-md-3">
                 <div class="thumbnail" >
                     <h4 class="text-center">
-                        <span class="label label-info" >Destination</span>
+                        <span class="label label-info" ><span style="color: #3d8b3d">
+                                <a href="https://www.google.com/maps?q={{ m.destination }}" target="_blank">
+                                    <i class="fa fa-map-marker"></i>
+                                </a>
+                            </span> {{ m.destination}}</span>
                         {{ m.idrando}}
-                        {{ m.destination}}
+
                     </h4>
                     <img src="{{ asset('uploads/' ~ m.imgurl1) }}" class="img-responsive">
                     <div class="caption">

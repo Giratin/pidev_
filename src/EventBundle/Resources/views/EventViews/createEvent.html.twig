@@ -1,0 +1,300 @@
+{% extends "adminPanel.html.twig" %}
+
+
+{% block stylesheet %}
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=PT+Serif|Titillium+Web|Warnes" rel="stylesheet">
+
+{% endblock %}
+
+{% block Title %}
+    Event
+{% endblock %}
+
+{% block stats %}
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-tasks fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">
+
+                        </div>
+                        <div>All Events</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('admin_list') }}">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-red">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-support fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">
+
+                        </div>
+                        <div>Create New</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('create_event') }}">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+{% endblock %}
+{% block body %}
+
+    <body>
+<div class="container">
+    <div class="row" style=" margin-bottom: 55px">
+        <div class="col-md-1"></div>
+        <div class="col-md-8" style="margin-top: 25px; background-color: #6a6a6a57; padding: 40px 180px">
+            <h1 style=" margin-bottom: 20px; font-size: 40px; text-align: center" >Add A New Event</h1>
+            {{ form_start(f) }}
+
+            <label>Name</label>
+            {{ form_widget(f.nomevent, {'type' : 'text', 'attr' : {'class' : 'form-control', 'placeholder' : 'Name'}}) }}
+            <span id="name_error" style="display: none; color: red; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-exclamation-triangle"></i></span>
+            <span id="name_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-check-circle"></i></span>
+
+            <label style="margin-top: 20px">Description</label>
+            {{ form_widget(f.description, {'type' : 'textarea', 'attr' : {'class' : 'form-control', 'placeholder' : 'Description'}}) }}
+            <span id="des_error" style="display: none; color: red; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-exclamation-triangle"></i></span>
+            <span id="des_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-check-circle"></i></span>
+
+            <label style="margin-top: 20px">Date</label>
+            {{ form_widget(f.dateevent,{'type' : 'date', 'attr' : {'class' : 'form-control', 'placeholder' : 'Date'}} ) }}
+            <span id="date_error" style="display: none; color: red; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-exclamation-triangle"></i></span>
+            <span id="date_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-check-circle"></i></span>
+
+            <label style="margin-top: 20px">Place</label>
+            {{ form_widget(f.lieuevent,{'type' : 'text', 'attr' : {'class' : 'form-control', 'placeholder' : 'Place'}} ) }}
+            <span id="place_error" style="display: none; color: red; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-exclamation-triangle"></i></span>
+            <span id="place_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-check-circle"></i></span>
+
+            <label style="margin-top: 20px">Capacity</label>
+            {{ form_widget(f.capevent, {'type' : 'number', 'attr' : {'class' : 'form-control', 'placeholder' : 'Capacity'}} ) }}
+            <span id="cap_error" style="display: none; color: red; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-exclamation-triangle"></i></span>
+            <span id="cap_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-check-circle"></i></span>
+
+            <label style="margin-top: 20px">Price</label>
+            {{ form_widget(f.ticketprice, {'type' : 'number', 'attr' : {'class' : 'form-control', 'placeholder' : 'Price'}} ) }}
+            <span id="price_error" style="display: none; color: red; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-exclamation-triangle"></i></span>
+            <span id="price_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-check-circle"></i></span>
+
+            <label style="margin-top: 20px">Add an image</label>
+            {{ form_widget(f.eventImg, {'type' : 'file', 'attr' : {'class' : 'form-control', 'placeholder' : ' '}} ) }}
+
+            <div class="clearfix" style="margin-top: 20px"></div>
+            <input type="submit" id="add_event" class="btn btn-primary btn-block" style="width: 50%; margin-left: 25%" value="Add">
+            <br>
+            {{ form_end(f) }}
+        </div>
+        <div class="col-md-1" style="margin-top: 25px">
+
+        </div>
+    </div>
+</div>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript" src="{{ asset('js/jquery-2.2.3.min.js') }}"></script>
+<script type="text/javascript" >
+
+    function parseDate(input) {
+        var parts = input.match(/(\d+)/g);
+        return new Date(parts[0], parts[1]-1, parts[2]); // months are 0-based
+    }
+
+    function days_between(date1) {
+
+        // The number of milliseconds in one day
+        var ONE_DAY = 1000 * 60 * 60 * 24;
+
+        // Convert both dates to milliseconds
+        var d1 = parseDate(date1);
+        var today =  new Date();
+        console.log( "ddd" + today.getTime());
+        var date1_ms = d1.getTime();
+        var date2_ms = today.getTime();
+
+        // Calculate the difference in milliseconds
+        var difference_ms = Math.abs(date1_ms - date2_ms);
+
+        // Convert back to days and return
+        console.log("day: " + Math.round(difference_ms/ONE_DAY));
+        return Math.round(difference_ms/ONE_DAY);
+    }
+
+    $('#eventbundle_event_nomevent').blur(function () {
+        var des =  $('#eventbundle_event_nomevent').val();
+        if(des.length < 4 || !(isNaN(des)))
+        {
+            $('#name_error').css("display","block");
+            $('#name_succ').css("display","none");
+            $('#eventbundle_event_nomevent').css("border","1px red solid");
+        }
+        else{
+            $('#name_error').css("display","none");
+            $('#name_succ').css("display","block");
+            $('#eventbundle_event_nomevent').css("border","1px green solid");
+        }
+
+    });
+    $('#eventbundle_event_description').blur(function () {
+        var des =  $('#eventbundle_event_description').val();
+        if(des.length < 4 || !(isNaN(des)))
+        {
+            $('#des_error').css("display","block");
+            $('#des_succ').css("display","none");
+            $('#eventbundle_event_description').css("border","1px red solid");
+        }
+        else{
+            $('#des_error').css("display","none");
+            $('#des_succ').css("display","block");
+            $('#eventbundle_event_description').css("border","1px green solid");
+        }
+
+    });
+    $('#eventbundle_event_lieuevent').blur(function () {
+        var des =  $('#eventbundle_event_lieuevent').val();
+        if(des.length < 4 || !(isNaN(des)))
+        {
+            $('#place_error').css("display","block");
+            $('#place_succ').css("display","none");
+            $('#eventbundle_event_lieuevent').css("border","1px red solid");
+        }
+        else{
+            $('#place_error').css("display","none");
+            $('#place_succ').css("display","block");
+            $('#eventbundle_event_lieuevent').css("border","1px green solid");
+        }
+
+    });
+
+
+    $('#eventbundle_event_capevent').keyup(function () {
+        var cap =  parseInt($('#eventbundle_event_capevent').val());
+        if( cap <= 0 || $('#eventbundle_event_capevent').val().length == 0)
+        {
+            $('#cap_error').css("display","block");
+            $('#eventbundle_event_capevent').css("border","1px red solid");
+            $('#cap_succ').css("display","none");
+            console.log("negative");
+        }
+        else
+        {
+            $('#cap_error').css("display","none");
+            $('#eventbundle_event_capevent').css("border","1px green solid");
+            $('#cap_succ').css("display","block");
+            console.log("positive");
+        }
+    });
+
+
+    $('#eventbundle_event_dateevent').blur(function () {
+        var today = new Date();
+        var day = $('#eventbundle_event_dateevent').val();
+
+        if(Date.parse(day) - Date.parse(new Date()) < 0)
+        {
+            //Date in past
+            console.log("gduima");
+            $('#date_error').css("display","block");
+            $('#eventbundle_event_dateevent').css("border","1px red solid");
+            $('#date_succ').css("display","none");
+        }
+        else{
+            //Date in future
+            console.log("it left  " + days_between(day) );
+            $('#date_error').css("display","none");
+            $('#eventbundle_event_dateevent').css("border","1px green solid");
+            $('#date_succ').css("display","block");
+        }
+
+    });
+
+    $('#eventbundle_event_ticketprice').keyup(function () {
+        var cap =  parseInt($('#eventbundle_event_ticketprice').val());
+        if( cap <= 0 || $('#eventbundle_event_ticketprice').val().length == 0)
+        {
+            $('#price_error').css("display","block");
+            $('#eventbundle_event_ticketprice').css("border","1px red solid");
+            $('#price_succ').css("display","none");
+        }
+        else
+        {
+            $('#price_error').css("display","none");
+            $('#price_succ').css("display","block");
+            $('#eventbundle_event_ticketprice').css("border","1px green solid");
+        }
+    });
+
+
+    $('#add_event').click(function (e) {
+        var cap =  parseInt($('#eventbundle_event_ticketprice').val());
+        if( cap <= 0 || $('#eventbundle_event_ticketprice').val().length < 2)
+        {
+            swal({
+                title: "Error!",
+                text: "You have to verify your entries first!",
+                icon: "error",
+            });
+            $('#submit_failed').css('display','block');
+            e.preventDefault();
+        }
+        else
+        {
+            var date1 = $('#eventbundle_event_dateevent').val();
+            //var today = Date.parse(new Date());
+
+            swal({
+                title: "Good job!",
+                text: "You've set all your entries correctly, there is: " + days_between(date1) + " left to this excursion",
+                icon: "success"
+            });
+            $('#submit_failed').css('display','none');
+            //
+        }
+
+        if(
+            $('#name_error').css("display") == "block" ||
+            $('#des_error').css("display") == "block" ||
+            $('#cap_error').css("display") == "block" ||
+            $('#date_error').css("display") =="block" ||
+            $('#price_error').css("display") == "block"
+        )
+        {
+            swal({
+                title: "Error!",
+                text: "You have to verify your entries first",
+                icon: "error",
+            });
+            $('#submit_failed').css('display','block');
+            e.preventDefault();
+        }
+    })
+
+</script>
+{% endblock %}
+
+
+

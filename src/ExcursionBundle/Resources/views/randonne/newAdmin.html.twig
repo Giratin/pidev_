@@ -28,7 +28,7 @@
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="{{ path('randonne_active_admin') }}">
                 <div class="panel-footer">
                     <span class="pull-left">View Details</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -54,7 +54,7 @@
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="{{ path('randonne_old_admin') }}">
                 <div class="panel-footer">
                     <span class="pull-left">View Details</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -112,14 +112,15 @@
 {% block body %}
 
 
-    <div class="row">
+    <div class="row" style="margin-top: 40px">
         <style>
             h4{
                 color: #fff;
             }
         </style>
-        <div class="col-lg-3"></div>
+        <div class="col-lg-1"></div>
         <div class="col-lg-6" >
+            <h1 style="margin-bottom: 40px">Available Excursions</h1>
             <table class="table">
                 <thead class="thead-light">
 
@@ -141,14 +142,15 @@
                         <td>{{ m.daterando }}</td>
                         <td>{{ m.prixpersonne }}</td>
                         <td>
-                            <a class="btn btn-warning" href="{{ path('randonne_edit', {'idrando':m.idrando}) }}" >Edit</a>
+                            <a class="btn btn-warning" href="{{ path('randonne_edit',{'idrando':m.idrando}) }}">Edit</a>
+                            <a class="btn btn-danger" href="{{ path('randonne_delete',{'idrando':m.idrando}) }}">delete</a>
                         </td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
         </div>
-        <div style="margin-left: 30%; margin-top: 20px">
+        <div style="margin-left: 30%; margin-top: 120px">
         {{ knp_pagination_render(randonne) }}
         </div>
         <div class="col-lg-3" ></div>

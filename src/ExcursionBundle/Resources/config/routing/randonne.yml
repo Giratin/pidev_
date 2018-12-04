@@ -33,10 +33,18 @@ randonne_active_admin:
     defaults: { _controller: "ExcursionBundle:Randonne:newadmin" }
     methods:  GET
 
+randonne_old_admin:
+    path:     /oldadmin
+    defaults: { _controller: "ExcursionBundle:Randonne:oldadmin" }
+    methods:  GET
+
 randonne_reserve:
     path:     /reserve/{idrando}
     defaults: { _controller: "ExcursionBundle:Randonne:reserve" }
 user_randonne:
     path:   /myexcursion
     defaults: { _controller: "ExcursionBundle:Randonne:myexcursion" }
+cancel_reservation:
+    path:   /cancel/{idrando}
+    defaults: { _controller: "ExcursionBundle:Randonne:cancel" }
 

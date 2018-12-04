@@ -21,4 +21,8 @@ voyage:
     resource: "@VoyageBundle/Resources/config/routing.yml"
     prefix:   /voyage
 
+event:
+    resource: "@EventBundle/Resources/config/routing.yml"
+    prefix:   /event
+
 

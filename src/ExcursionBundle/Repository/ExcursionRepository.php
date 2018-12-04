@@ -71,4 +71,27 @@ class ExcursionRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult();
     }
 
+
+    public function topExcursion()
+    { //CURRENT_TIMESTAMP()
+        $query  = $this->getEntityManager()
+            ->createQuery('SELECT R FROM ExcursionBundle:Randonne R WHERE R.nbreclient=
+                               (SELECT MAX(C.nbreclient) FROM ExcursionBundle:Randonne C where (C.daterando) > CURRENT_TIMESTAMP() )');
+        return $query->getResult();
+    }
+
+    public function gainOld()
+    {
+        $query  = $this->getEntityManager()
+            ->createQuery('SELECT R FROM ExcursionBundle:Randonne R WHERE NOT(R.nbreclient=0) AND (R.daterando) < CURRENT_TIMESTAMP()');
+        return $query->getResult();
+    }
+
+    public function gainNew()
+    {
+        $query  = $this->getEntityManager()
+            ->createQuery('SELECT R FROM ExcursionBundle:Randonne R WHERE NOT(R.nbreclient=0) AND (R.daterando) > CURRENT_TIMESTAMP()');
+        return $query->getResult();
+    }
+
 }

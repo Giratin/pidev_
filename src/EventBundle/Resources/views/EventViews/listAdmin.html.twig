@@ -1,0 +1,199 @@
+{% extends "adminPanel.html.twig" %}
+
+{% block stylesheet %}
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=PT+Serif|Titillium+Web|Warnes" rel="stylesheet">
+
+{% endblock %}
+
+{% block Title %}
+    Event
+{% endblock %}
+
+{% block stats %}
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-tasks fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">
+
+                        </div>
+                        <div>All Events</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('admin_list') }}">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-red">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-support fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">
+
+                        </div>
+                        <div>Create New</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ path('create_event') }}">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block body %}
+    <div>
+        <center style="margin-bottom: 40px">
+
+            <div class="container" >
+                <br />
+                <h2 align="center"></h2><br />
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"></span>
+                        <input type="text" name="search_text" id="search_text" style="width: 300px;" placeholder="Search" class="form-control" />
+                    </div>
+                </div>
+
+                <br />
+                <form>
+                    <div id="result">
+                    </div>
+
+                </form>
+
+
+            </div>
+            <h1>List of events</h1><br>
+            <div>
+                <form action="{{ path('read_event') }}" method="get">
+                    <label for="filter">Filter</label>
+                    <input name="filter" type="text">
+                    <button type="submit" class="btn btn-default btn-sm">Filter Results</button>
+                </form>
+            </div>
+            <br>
+            <br>
+            <br>
+            <table class="table table-hover table-responsive" style="text-align: center; margin-left: 0px">
+                <thead>
+                <tr><th>{{ knp_pagination_sortable(events,'Name','bp.nomevent') }}</th><th>{{ knp_pagination_sortable(events,'Date','bp.dateevent') }}</th><th>{{ knp_pagination_sortable(events,'Address','bp.lieuevent') }}</th><th>{{ knp_pagination_sortable(events,'Description','bp.description') }}</th><th>{{ knp_pagination_sortable(events,'Expected','bp.capevent') }}</th><th>{{ knp_pagination_sortable(events,'Participating','bp.nbrepersonnes') }}</th><th>{{ knp_pagination_sortable(events,'Ticket Price','bp.ticketprice') }}</th><th> Poster </th><th> </th></tr>
+                </thead>
+                <tbody>
+                {% for e in events %}
+                    <tr>
+                        <td>{{ e.nomEvent }} </td>
+                        <td>{{ e.dateEvent }} </td>
+                        <td>{{ e.lieuEvent }}</td>
+                        <td>{{ e.description }} </td>
+                        <td>{{ e.capEvent }} </td>
+                        <td>{{ e.nbrePersonnes }}</td>
+                        <td>{{ e.ticketPrice }} </td>
+                        <td> <img src="{{ asset('uploads/' ~ e.eventImg) }}" style="width: 80px; height: 150px"> </td>
+                        <td><a href="{{ path ('update_event',{'idEvent':e.idEvent}) }}" style="color: #da7908">Update</a></td>
+                        <td><a href="{{ path ('delete_event',{'idEvent':e.idEvent}) }}" style="color: #da7908">Delete</a></td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+            <div class="navigation text-center" style="text-align: center; margin-left: -100px" >
+                {{ knp_pagination_render(events) }}
+            </div>
+        </center>
+    </div>
+{% endblock %}
+{% block javascripts %}
+
+    <script type="text/javascript" src="{{ asset('js/jquery-2.2.3.min.js') }}">
+    </script>
+    <script  type="text/javascript" >
+        $(document).ready(function () {
+            $('#search_text').keyup(function(){
+                var search = $('#search_text').val();
+                $.ajax({
+                    url:"{{ path('search_ajax') }}",
+                    type:'POST',
+                    data:{'nomEvent':search},
+
+                    success:function(data)
+                    {
+
+                        if(search!=""){
+                            console.log('cv');
+
+                            var output =
+                                "<div class='table-responsive'>"+
+                                "<table id='tab' class='table table bordered'>"+
+                                "<tr style='color: saddlebrown'>"+
+                                "<th>"+"Event"+"</th>"+
+                                "<th>"+"Description"+"</th>"+
+                                "<th>"+"Date"+"</th>"+
+                                "<th>"+"Ticket Price"+"</th>"+
+                                "<th>"+"Action";
+                            $.each(data,function(key,val){
+                                var id=val.idEvent;
+                                var path = '{{ path('update_event',{'idEvent': 'x'}) }}'
+                                path = path.replace("x",id);
+                                var path0 = '{{ path('delete_event',{'idEvent': 'xx'}) }}'
+                                path0 = path0.replace("xx",id);
+                                console.log(id);
+
+
+
+                                output+=
+                                    "<a href=''>"+
+                                    "<tr >"+
+                                    "<td style='color: darkorange'>"+val.nomevent+
+                                    "<td>"+val.description+ "</td>"+
+                                    "<td>"+val.dateevent+"</td>"+
+                                    "<td>"+val.ticketprice+"</td>"+
+                                    "<td><a href='"+ path + "'>Update</a></td>"+
+                                    "<td><a href='"+ path0 + "'>Delete</a></td>"
+                                "</td>"
+
+                                "</tr> visit </a>";
+
+
+
+
+
+
+
+                            });
+                            output+="<ul>";
+                            $("#result").html(output);
+
+                        }
+                        else{
+                            $('#result').html("");
+                        }
+                    }
+
+                });});});
+
+
+    </script>
+
+{% endblock %}
